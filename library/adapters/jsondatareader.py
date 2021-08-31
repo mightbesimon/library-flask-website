@@ -1,7 +1,12 @@
+''' COMPSCI 235 (2021) - University of Auckland
+    ASSIGNMENT PHASE TWO
+    Simon Shan  441147157
+'''
+
 import json
 from typing import List
 
-from library.domain.model import Publisher, Author, Book
+from library.models import Publisher, Author, Book
 
 
 class BooksJSONReader:
