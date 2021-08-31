@@ -15,52 +15,40 @@ class BooksJSONReader:
     def dataset_of_books(self) -> List[Book]:
         return self.__dataset_of_books
 
-    def read_books_file(self) -> list:
-        books_json = []
-        with open(self.__books_file_name, encoding='UTF-8') as books_jsonfile:
-            for line in books_jsonfile:
-                book_entry = json.loads(line)
-                books_json.append(book_entry)
-        return books_json
-
-    def read_authors_file(self) -> list:
-        authors_json = []
-        with open(self.__authors_file_name, encoding='UTF-8') as authors_jsonfile:
-            for line in authors_jsonfile:
-                author_entry = json.loads(line)
-                authors_json.append(author_entry)
-        return authors_json
-
-
     def read_json_files(self):
-        authors_json = self.read_authors_file()
-        books_json = self.read_books_file()
+        authors = {}
 
-        for book_json in books_json:
-            book_instance = Book(int(book_json['book_id']), book_json['title'])
-            book_instance.publisher = Publisher(book_json['publisher'])
-            if book_json['publication_year'] != "":
-                book_instance.release_year = int(book_json['publication_year'])
-            if book_json['is_ebook'].lower() == 'false':
-                book_instance.ebook = False
-            else:
-                if book_json['is_ebook'].lower() == 'true':
-                    book_instance.ebook = True
-            book_instance.description = book_json['description']
-            if book_json['num_pages'] != "":
-                book_instance.num_pages = int(book_json['num_pages'])
+        # build the authors dictionary
+        with open(self.__authors_file_name, 'r') as file:
+            for line in file.read().split('\n'):
+                if not line: continue
+                author_data = json.loads(line)
 
-            # extract the author ids:
-            list_of_authors_ids = book_json['authors']
-            for author_id in list_of_authors_ids:
+                author_id   = int(author_data['author_id'])                 # author ID
+                authors[author_id] = Author(author_id, author_data['name']) # auther full name
 
-                numerical_id = int(author_id['author_id'])
-                # We assume book authors are available in the authors file,
-                # otherwise more complex handling is required.
-                author_name = None
-                for author_json in authors_json:
-                    if int(author_json['author_id']) == numerical_id:
-                        author_name = author_json['name']
-                book_instance.add_author(Author(numerical_id, author_name))
+        # build the dataset of books
+        with open(self.__books_file_name, 'r') as file:
+            for line in file.read().split('\n'):
+                if not line: continue
+                book_data = json.loads(line)
+                book = Book(int(book_data['book_id']), book_data['title'])  # book ID
+                                                                            # book title
+                book.publisher    = Publisher(book_data['publisher'])       # publisher
+                book.description  = book_data['description']                # description
 
-            self.__dataset_of_books.append(book_instance)
+                if book_data['publication_year']:                           # release year
+                    book.release_year = int(book_data['publication_year'])
+                if book_data['is_ebook'].lower()=='true':                   # is ebook
+                    book.ebook = True
+                if book_data['is_ebook'].lower()=='false':                  # is not ebook
+                    book.ebook = False
+                if book_data['num_pages']:                                  # num pages
+                    book.num_pages = int(book_data['num_pages'])
+
+                # map authors to the book
+                for author in book_data['authors']:                         # book authors
+                    author_id = int(author['author_id'])
+                    book.add_author(authors[author_id])
+
+                self.dataset_of_books.append(book)
