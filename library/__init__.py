@@ -1,20 +1,15 @@
-"""Initialize Flask app."""
+''' COMPSCI 235 (2021) - University of Auckland
+    ASSIGNMENT PHASE TWO
+    Simon Shan  441147157
+'''
 
 from flask import Flask, render_template
 
-# TODO: Access to the books should be implemented via the repository pattern and using blueprints, so this can not stay here!
-from library.domain.model import Book
+from config import EnvConfig
+from library.adapters.LibraryRepository import LibraryRepository
 
-# TODO: Access to the books should be implemented via the repository pattern and using blueprints, so this can not stay here!
-def create_some_book():
-    some_book = Book(1, "Harry Potter and the Chamber of Secrets")
-    some_book.description = "Ever since Harry Potter had come home for the summer, the Dursleys had been so mean \
-                             and hideous that all Harry wanted was to get back to the Hogwarts School for \
-                             Witchcraft and Wizardry. But just as he’s packing his bags, Harry receives a \
-                             warning from a strange impish creature who says that if Harry returns to Hogwarts, \
-                             disaster will strike."
-    some_book.release_year = 1999
-    return some_book
+
+_repo = LibraryRepository()
 
 
 def create_app():
@@ -23,8 +18,10 @@ def create_app():
 
     @app.route('/')
     def home():
-        some_book = create_some_book()
-        # Use Jinja to customize a predefined html page rendering the layout for showing a single book.
-        return render_template('simple_book.html', book=some_book)
+        return render_template('catalogue.html', catalogue=_repo.get_catalogue())
+
+    @app.route('/book/<id>')
+    def book(id):
+        return render_template('simple_book.html', book=_repo.get_book_by_id(id))
 
     return app

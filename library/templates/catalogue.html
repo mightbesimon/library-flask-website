@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalogue</title>
+</head>
+<body>
+    <h1>Catalogue</h1>
+    <ul>
+        {% for book in catalogue %}
+            <li><a href="book/{{ book.book_id }}">{{ book.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
