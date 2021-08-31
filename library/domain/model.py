@@ -1,10 +1,33 @@
+''' COMPSCI 235 (2021) - University of Auckland
+    ASSIGNMENT PHASE TWO
+    Simon Shan  441147157
+'''
+
 from datetime import datetime
 from typing import List
+
+
+class key_property(property):
+    '''marks a property as the key'''
+    def __set_name__(self, owner, name):
+        owner.key = self
+
+class BaseModel:
+    '''uses the property marked as the key for comparisons and hashs'''
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) \
+           and self.key==other.key
+
+    def __lt__(self, other):
+        return self.key < other.key
+
+    def __hash__(self):
+        return hash(self.key)
 
 ################################################################
 ####                       Publisher                        ####
 ################################################################
-class Publisher:
+class Publisher(BaseModel):
 
     def __init__(self, publisher_name: str):
         self.name = publisher_name      # use setter
@@ -12,18 +35,8 @@ class Publisher:
     def __repr__(self):
         return f'<Publisher {self.name}>'
 
-    def __eq__(self, other):
-        return isinstance(other, self.__class__) \
-           and self.name==other.name
-
-    def __lt__(self, other):
-        return self.name < other.name
-
-    def __hash__(self):
-        return hash(self.name)
-
     ####################   properties   ####################
-    @property
+    @key_property
     def name(self) -> str:
         return self.__name
 
@@ -36,7 +49,7 @@ class Publisher:
 ################################################################
 ####                        Author                          ####
 ################################################################
-class Author:
+class Author(BaseModel):
 
     def __init__(self, author_id: int, author_full_name: str):
         if not isinstance(author_id, int) or author_id<0:
@@ -46,17 +59,7 @@ class Author:
         self.full_name   = author_full_name     # use setter
 
     def __repr__(self):
-        return f'<Author {self.full_name}, author id = {self.unique_id}>'
-
-    def __eq__(self, other):
-        return isinstance(other, self.__class__) \
-           and self.unique_id==other.unique_id
-
-    def __lt__(self, other):
-        return self.unique_id < other.unique_id
-
-    def __hash__(self):
-        return hash(self.unique_id)
+        return f'<Author {self.full_name}, author id = {self.unique_id}>'\
 
     #################   instance methods   #################
 
@@ -69,7 +72,7 @@ class Author:
         return author in self.__coauthors
 
     ####################   properties   ####################
-    @property
+    @key_property
     def unique_id(self) -> int:
         return self.__unique_id
 
@@ -85,7 +88,7 @@ class Author:
 ################################################################
 ####                         Book                           ####
 ################################################################
-class Book:
+class Book(BaseModel):
 
     def __init__(self, book_id: int, book_title: str):
         if not isinstance(book_id, int) or book_id<0:
@@ -104,16 +107,6 @@ class Book:
     def __repr__(self):
         return f'<Book {self.title}, book id = {self.book_id}>'
 
-    def __eq__(self, other):
-        return isinstance(other, self.__class__) \
-           and self.book_id==other.book_id
-
-    def __lt__(self, other):
-        return self.book_id < other.book_id
-
-    def __hash__(self):
-        return hash(self.book_id)
-
     #################   instance methods   #################
 
     def add_author(self, author: Author):
@@ -125,12 +118,10 @@ class Book:
             self.__authors.remove(author)
 
     ####################   properties   ####################
-    # book_id { get }
-    @property
+    @key_property
     def book_id(self) -> int:
         return self.__book_id
 
-    # title { get set }
     @property
     def title(self) -> str:
         return self.__title
@@ -188,7 +179,7 @@ class Book:
 ################################################################
 ####                        Review                          ####
 ################################################################
-class Review:
+class Review(BaseModel):
 
     def __init__(self, book: Book, review_text: str, rating: int):
         self.__book = book if isinstance(book, Book) else None
@@ -197,10 +188,6 @@ class Review:
         if not 1<=rating<=5: raise ValueError
         self.__rating = rating
         self.__timestamp = datetime.now()
-
-    def __eq__(self, other):
-        return isinstance(other, self.__class__) \
-           and self.timestamp==other.timestamp
 
     def __repr__(self):
         return f'<Review of book {self.book}, rating = {self.rating}, timestamp = {self.timestamp}>'
@@ -218,18 +205,18 @@ class Review:
     def rating(self) -> int:
         return self.__rating
 
-    @property
+    @key_property
     def timestamp(self) -> datetime:
         return self.__timestamp
 
 ################################################################
 ####                         User                           ####
 ################################################################
-class User:
+class User(BaseModel):
 
-    def __init__(self, user_name: str, password: str):
-        self.__user_name  = user_name.strip().lower() \
-            if isinstance(user_name, str) and user_name.strip() \
+    def __init__(self, username: str, password: str):
+        self.__username  = username.strip().lower() \
+            if isinstance(username, str) and username.strip() \
             else None
         self.__password   = password \
             if isinstance(password,  str) and len(password)>=7  \
@@ -239,17 +226,7 @@ class User:
         self.__pages_read = 0
 
     def __repr__(self):
-        return f'<User {self.user_name}>'
-
-    def __eq__(self, other):
-        return isinstance(other, self.__class__) \
-           and self.user_name==other.user_name
-
-    def __lt__(self, other):
-        return self.user_name < other.user_name
-
-    def __hash__(self):
-        return hash(self.user_name)
+        return f'<User {self.username}>'
 
     #################   instance methods   #################
 
@@ -263,9 +240,9 @@ class User:
             self.__reviews.append(review)
 
     ####################   properties   ####################
-    @property
-    def user_name(self) -> str:
-        return self.__user_name
+    @key_property
+    def username(self) -> str:
+        return self.__username
 
     @property
     def password(self) -> str:
