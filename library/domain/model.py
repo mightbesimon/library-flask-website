@@ -1,33 +1,20 @@
 from datetime import datetime
 from typing import List
 
-
+################################################################
+####                       Publisher                        ####
+################################################################
 class Publisher:
 
     def __init__(self, publisher_name: str):
-        # This makes sure the setter is called here in the initializer/constructor as well.
-        self.name = publisher_name
-
-    @property
-    def name(self) -> str:
-        return self.__name
-
-    @name.setter
-    def name(self, publisher_name: str):
-        self.__name = "N/A"
-        if isinstance(publisher_name, str):
-            # Make sure leading and trailing whitespace is removed.
-            publisher_name = publisher_name.strip()
-            if publisher_name != "":
-                self.__name = publisher_name
+        self.name = publisher_name      # use setter
 
     def __repr__(self):
         return f'<Publisher {self.name}>'
 
     def __eq__(self, other):
-        if not isinstance(other, self.__class__):
-            return False
-        return other.name == self.name
+        return isinstance(other, self.__class__) \
+           and self.name==other.name
 
     def __lt__(self, other):
         return self.name < other.name
@@ -35,59 +22,35 @@ class Publisher:
     def __hash__(self):
         return hash(self.name)
 
+    ####################   properties   ####################
+    @property
+    def name(self) -> str:
+        return self.__name
 
+    @name.setter
+    def name(self, publisher_name: str):
+        self.__name = publisher_name.strip() \
+            if isinstance(publisher_name, str) and publisher_name.strip() \
+            else 'N/A'
+
+################################################################
+####                        Author                          ####
+################################################################
 class Author:
 
     def __init__(self, author_id: int, author_full_name: str):
-        if not isinstance(author_id, int):
+        if not isinstance(author_id, int) or author_id<0:
             raise ValueError
-
-        if author_id < 0:
-            raise ValueError
-
         self.__unique_id = author_id
-
-        # Uses the attribute setter method.
-        self.full_name = author_full_name
-
-        # Initialize author colleagues data structure with empty set.
-        # We use a set so each unique author is only represented once.
-        self.__authors_this_one_has_worked_with = set()
-
-    @property
-    def unique_id(self) -> int:
-        return self.__unique_id
-
-    @property
-    def full_name(self) -> str:
-        return self.__full_name
-
-    @full_name.setter
-    def full_name(self, author_full_name: str):
-        if isinstance(author_full_name, str):
-            # make sure leading and trailing whitespace is removed
-            author_full_name = author_full_name.strip()
-            if author_full_name != "":
-                self.__full_name = author_full_name
-            else:
-                raise ValueError
-        else:
-            raise ValueError
-
-    def add_coauthor(self, coauthor):
-        if isinstance(coauthor, self.__class__) and coauthor.unique_id != self.unique_id:
-            self.__authors_this_one_has_worked_with.add(coauthor)
-
-    def check_if_this_author_coauthored_with(self, author):
-        return author in self.__authors_this_one_has_worked_with
+        self.__coauthors = set()
+        self.full_name   = author_full_name     # use setter
 
     def __repr__(self):
         return f'<Author {self.full_name}, author id = {self.unique_id}>'
 
     def __eq__(self, other):
-        if not isinstance(other, self.__class__):
-            return False
-        return self.unique_id == other.unique_id
+        return isinstance(other, self.__class__) \
+           and self.unique_id==other.unique_id
 
     def __lt__(self, other):
         return self.unique_id < other.unique_id
@@ -95,63 +58,91 @@ class Author:
     def __hash__(self):
         return hash(self.unique_id)
 
+    #################   instance methods   #################
 
+    def add_coauthor(self, coauthor):
+        if self!=coauthor:
+            self.__coauthors.add(coauthor)
+            # coauthor.__coauthors.add(self)    # the tests didn't like that
+
+    def check_if_this_author_coauthored_with(self, author):
+        return author in self.__coauthors
+
+    ####################   properties   ####################
+    @property
+    def unique_id(self) -> int:
+        return self.__unique_id
+
+    @property
+    def full_name(self) -> str:
+        return self.__full_name
+    @full_name.setter
+    def full_name(self, author_full_name: str):
+        if not isinstance(author_full_name, str) or not author_full_name.strip():
+            raise ValueError
+        self.__full_name = author_full_name.strip()
+
+################################################################
+####                         Book                           ####
+################################################################
 class Book:
 
     def __init__(self, book_id: int, book_title: str):
-        if not isinstance(book_id, int):
-            raise ValueError
-
-        if book_id < 0:
+        if not isinstance(book_id, int) or book_id<0:
             raise ValueError
 
         self.__book_id = book_id
-
-        # use the attribute setter
-        self.title = book_title
+        self.title     = book_title     #  use setter
 
         self.__description = None
-        self.__publisher = None
-        self.__authors = []
-        self.__release_year = None
-        self.__ebook = None
-        self.__num_pages = None
+        self.__publisher   = None
+        self.__authors     = []
+        self.__release_year= None
+        self.__ebook       = None
+        self.__num_pages   = None
 
+    def __repr__(self):
+        return f'<Book {self.title}, book id = {self.book_id}>'
 
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) \
+           and self.book_id==other.book_id
+
+    def __lt__(self, other):
+        return self.book_id < other.book_id
+
+    def __hash__(self):
+        return hash(self.book_id)
+
+    #################   instance methods   #################
+
+    def add_author(self, author: Author):
+        if isinstance(author, Author) and author not in self.authors:
+            self.authors.append(author)
+
+    def remove_author(self, author: Author):
+        if isinstance(author, Author) and author in self.__authors:
+            self.__authors.remove(author)
+
+    ####################   properties   ####################
+    # book_id { get }
     @property
     def book_id(self) -> int:
         return self.__book_id
 
+    # title { get set }
     @property
     def title(self) -> str:
         return self.__title
-
     @title.setter
     def title(self, book_title: str):
-        if isinstance(book_title, str):
-            book_title = book_title.strip()
-            if book_title != "":
-                self.__title = book_title
-            else:
-                raise ValueError
-        else:
+        if not isinstance(book_title, str) or not book_title.strip():
             raise ValueError
-
-    @property
-    def release_year(self) -> int:
-        return self.__release_year
-
-    @release_year.setter
-    def release_year(self, release_year: int):
-        if isinstance(release_year, int) and release_year >= 0:
-            self.__release_year = release_year
-        else:
-            raise ValueError
+        self.__title = book_title.strip()
 
     @property
     def description(self) -> str:
         return self.__description
-
     @description.setter
     def description(self, description: str):
         if isinstance(description, str):
@@ -160,38 +151,27 @@ class Book:
     @property
     def publisher(self) -> Publisher:
         return self.__publisher
-
     @publisher.setter
     def publisher(self, publisher: Publisher):
         if isinstance(publisher, Publisher):
             self.__publisher = publisher
-        else:
-            self.__publisher = None
 
     @property
     def authors(self) -> List[Author]:
         return self.__authors
 
-    def add_author(self, author: Author):
-        if not isinstance(author, Author):
-            return
-
-        if author in self.__authors:
-            return
-
-        self.__authors.append(author)
-
-    def remove_author(self, author: Author):
-        if not isinstance(author, Author):
-            return
-
-        if author in self.__authors:
-            self.__authors.remove(author)
+    @property
+    def release_year(self) -> int:
+        return self.__release_year
+    @release_year.setter
+    def release_year(self, release_year: int):
+        if not isinstance(release_year, int) or release_year<0:
+            raise ValueError
+        self.__release_year = release_year
 
     @property
     def ebook(self) -> bool:
         return self.__ebook
-
     @ebook.setter
     def ebook(self, is_ebook: bool):
         if isinstance(is_ebook, bool):
@@ -200,47 +180,32 @@ class Book:
     @property
     def num_pages(self) -> int:
         return self.__num_pages
-
     @num_pages.setter
     def num_pages(self, num_pages: int):
         if isinstance(num_pages, int) and num_pages >= 0:
             self.__num_pages = num_pages
 
-    def __repr__(self):
-        return f'<Book {self.title}, book id = {self.book_id}>'
-
-    def __eq__(self, other):
-        if not isinstance(other, self.__class__):
-            return False
-        return self.book_id == other.book_id
-
-    def __lt__(self, other):
-        return self.book_id < other.book_id
-
-    def __hash__(self):
-        return hash(self.book_id)
-
-
+################################################################
+####                        Review                          ####
+################################################################
 class Review:
 
     def __init__(self, book: Book, review_text: str, rating: int):
-        if isinstance(book, Book):
-            self.__book = book
-        else:
-            self.__book = None
-
-        if isinstance(review_text, str):
-            self.__review_text = review_text.strip()
-        else:
-            self.__review_text = "N/A"
-
-        if isinstance(rating, int) and rating >= 1 and rating <= 5:
-            self.__rating = rating
-        else:
-            raise ValueError
-
+        self.__book = book if isinstance(book, Book) else None
+        self.__review_text = review_text.strip() \
+                    if isinstance(review_text, str) else 'N/A'
+        if not 1<=rating<=5: raise ValueError
+        self.__rating = rating
         self.__timestamp = datetime.now()
 
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) \
+           and self.timestamp==other.timestamp
+
+    def __repr__(self):
+        return f'<Review of book {self.book}, rating = {self.rating}, timestamp = {self.timestamp}>'
+
+    ####################   properties   ####################
     @property
     def book(self) -> Book:
         return self.__book
@@ -257,34 +222,47 @@ class Review:
     def timestamp(self) -> datetime:
         return self.__timestamp
 
-    def __eq__(self, other):
-        if not isinstance(other, self.__class__):
-            return False
-
-        return other.book == self.book and other.review_text == self.review_text \
-               and other.rating == self.rating and other.timestamp == self.timestamp
-
-    def __repr__(self):
-        return f'<Review of book {self.book}, rating = {self.rating}, timestamp = {self.timestamp}>'
-
-
+################################################################
+####                         User                           ####
+################################################################
 class User:
 
     def __init__(self, user_name: str, password: str):
-        if user_name == "" or not isinstance(user_name, str):
-            self.__user_name = None
-        else:
-            self.__user_name = user_name.strip().lower()
-
-        if password == "" or not isinstance(password, str) or len(password) < 7:
-            self.__password = None
-        else:
-            self.__password = password
-
+        self.__user_name  = user_name.strip().lower() \
+            if isinstance(user_name, str) and user_name.strip() \
+            else None
+        self.__password   = password \
+            if isinstance(password,  str) and len(password)>=7  \
+            else None
         self.__read_books = []
-        self.__reviews = []
+        self.__reviews    = []
         self.__pages_read = 0
 
+    def __repr__(self):
+        return f'<User {self.user_name}>'
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) \
+           and self.user_name==other.user_name
+
+    def __lt__(self, other):
+        return self.user_name < other.user_name
+
+    def __hash__(self):
+        return hash(self.user_name)
+
+    #################   instance methods   #################
+
+    def read_a_book(self, book: Book):
+        if not isinstance(book, Book): return
+        self.__read_books.append(book)
+        self.__pages_read += book.num_pages if book.num_pages else 0
+
+    def add_review(self, review: Review):
+        if isinstance(review, Review):
+            self.__reviews.append(review)
+
+    ####################   properties   ####################
     @property
     def user_name(self) -> str:
         return self.__user_name
@@ -305,32 +283,9 @@ class User:
     def pages_read(self) -> int:
         return self.__pages_read
 
-    def read_a_book(self, book: Book):
-        if isinstance(book, Book):
-            self.__read_books.append(book)
-            if book.num_pages is not None:
-                self.__pages_read += book.num_pages
-
-    def add_review(self, review: Review):
-        if isinstance(review, Review):
-            # Review objects are in practice always considered different due to their timestamp.
-            self.__reviews.append(review)
-
-    def __repr__(self):
-        return f'<User {self.user_name}>'
-
-    def __eq__(self, other):
-        if not isinstance(other, self.__class__):
-            return False
-        return other.user_name == self.user_name
-
-    def __lt__(self, other):
-        return self.user_name < other.user_name
-
-    def __hash__(self):
-        return hash(self.user_name)
-
-
+################################################################
+####                    BooksInventory                      ####
+################################################################
 class BooksInventory:
 
     def __init__(self):
@@ -338,10 +293,10 @@ class BooksInventory:
         self.__prices = {}
         self.__stock_count = {}
 
-    def add_book(self, book: Book, price: int, nr_books_in_stock: int):
+    def add_book(self, book: Book, price: int, stock_count: int):
         self.__books[book.book_id] = book
         self.__prices[book.book_id] = price
-        self.__stock_count[book.book_id] = nr_books_in_stock
+        self.__stock_count[book.book_id] = stock_count
 
     def remove_book(self, book_id: int):
         self.__books.pop(book_id)
@@ -349,22 +304,18 @@ class BooksInventory:
         self.__stock_count.pop(book_id)
 
     def find_book(self, book_id: int):
-        if book_id in self.__books.keys():
+        if book_id in self.__books:
             return self.__books[book_id]
-        return None
 
     def find_price(self, book_id: int):
-        if book_id in self.__books.keys():
+        if book_id in self.__books:
             return self.__prices[book_id]
-        return None
 
     def find_stock_count(self, book_id: int):
-        if book_id in self.__books.keys():
+        if book_id in self.__books:
             return self.__stock_count[book_id]
-        return None
 
     def search_book_by_title(self, book_title: str):
-        for book_id in self.__books.keys():
-            if self.__books[book_id].title == book_title:
-                return self.__books[book_id]
-        return None
+        for book_id, book in self.__books.items():
+            if book.title == book_title:
+                return book
