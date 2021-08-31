@@ -405,7 +405,7 @@ def read_books_and_authors():
     # we use a method from a utils file in the root folder to figure out the root
     # this way testing code is always finding the right path to the data files
     root_folder = get_project_root()
-    data_folder = Path("library/adapters/data")
+    data_folder = Path("library/data")
     path_to_books_file = str(root_folder / data_folder / books_file_name)
     path_to_authors_file = str(root_folder / data_folder / authors_file_name)
     reader = BooksJSONReader(path_to_books_file, path_to_authors_file)
