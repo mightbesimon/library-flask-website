@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Library</title>
+    <style type="text/css">
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #4B8C54;
+        }
+        nav {
+            top: 0px;
+            left: 0px;
+            position: fixed;
+            width: 240px;
+            height: 100%;
+            background: #4B8C54;
+            color: #fff;
+            padding-left: 20px;
+        }
+        nav h1 {
+            color: #000;
+        }
+        nav a {
+            color: #fff;
+        }
+        nav a:hover {
+            color: #000;
+        }
+        main {
+            margin-left: 300px;
+            margin-right: 80px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        main h1 {
+            color: #4B8C54;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        {% include 'navigation.html' %}
+    </nav>
+    <main>
+        {% block main %} {% endblock %}
+        <footer>copyright mightbesimon 2021 | github.com/mightbesimon</footer>
+    </main>
+</body>
+</html>

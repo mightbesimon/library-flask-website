@@ -3,7 +3,7 @@
     Simon Shan  441147157
 '''
 
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 
 from config import EnvConfig
 from library.adapters.LibraryRepository import LibraryRepository
@@ -18,6 +18,10 @@ def create_app():
 
     @app.route('/')
     def home():
+        return redirect(url_for('catalogue'))
+
+    @app.route('/catalogue')
+    def catalogue():
         return render_template('catalogue.html', catalogue=_repo.get_catalogue())
 
     @app.route('/book/<bookID>')
