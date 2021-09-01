@@ -12,36 +12,36 @@ FILENAME_BOOKS   = DATA_DIRECTORY+ 'comic_books_excerpt.json'
 FILENAME_AUTHORS = DATA_DIRECTORY+'book_authors_excerpt.json'
 
 
-class JsonDataContext:
+class LibraryDataContext:
 
     @property
     def catalogue(self) -> DataSet:
-        '''the catalogue of books of the library'''
-        return DataSet(self._catalogue)
+        '''the catalogue of books of the library
+           contains both books and authors within the book model'''
+        return self._catalogue
 
     @property
     def books(self) -> DataSet:
-        '''an alias for catalogue'''
-        return DataSet(self._catalogue)
+        '''an alias for catalogue
+           Normally would be a db table of books, but since the book model
+           stores author objects within, it's unsuitable data for a table.'''
+        return self._catalogue
     
     @property
     def users(self) -> DataSet:
-        return DataSet(self._users)
-
-    @property
-    def authors(self) -> DataSet:
-        return DataSet(self._authors)
+        '''registered users of the library'''
+        return self._users
 
     @property
     def reviews(self) -> DataSet:
-        return DataSet(self._reviews)
-    
-    @property
-    def publishers(self) -> DataSet:
-        return DataSet(self._publishers)
+        '''reviews left on this site'''
+        return self._reviews
 
     def __init__(self):
-        '''read in the books'''
+        # read in the books
         reader = BooksJSONReader(FILENAME_BOOKS, FILENAME_AUTHORS)
         reader.read_json_files()
-        self._catalogue = reader.dataset_of_books
+
+        self._catalogue = DataSet(reader.dataset_of_books)
+        self._users     = DataSet()
+        self._reviews   = DataSet()

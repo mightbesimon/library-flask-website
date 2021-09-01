@@ -4,12 +4,12 @@
 '''
 
 from library.adapters.IRepository import IRepository
-from library.adapters.JsonDataContext import JsonDataContext
+from library.adapters.LibraryDataContext import LibraryDataContext
 
 class LibraryRepository(IRepository):
 
     def __init__(self):
-        self._database = JsonDataContext()
+        self._database = LibraryDataContext()
 
     def get_catalogue(self):
         return self._database.catalogue
