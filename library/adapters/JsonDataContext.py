@@ -4,6 +4,7 @@
 '''
 
 from library.adapters.jsondatareader import BooksJSONReader
+from library.adapters.DataSet import DataSet
 
 # path constants
 DATA_DIRECTORY   = 'library/data/'
@@ -14,30 +15,30 @@ FILENAME_AUTHORS = DATA_DIRECTORY+'book_authors_excerpt.json'
 class JsonDataContext:
 
     @property
-    def catalogue(self):
+    def catalogue(self) -> DataSet:
         '''the catalogue of books of the library'''
-        return self._catalogue
+        return DataSet(self._catalogue)
 
     @property
-    def books(self):
+    def books(self) -> DataSet:
         '''an alias for catalogue'''
-        return self._catalogue
+        return DataSet(self._catalogue)
     
     @property
-    def users(self):
-        return self._users
+    def users(self) -> DataSet:
+        return DataSet(self._users)
 
     @property
-    def authors(self):
-        return self._authors
+    def authors(self) -> DataSet:
+        return DataSet(self._authors)
 
     @property
-    def reviews(self):
-        return self._reviews
+    def reviews(self) -> DataSet:
+        return DataSet(self._reviews)
     
     @property
-    def publishers(self):
-        return self._publishers
+    def publishers(self) -> DataSet:
+        return DataSet(self._publishers)
 
     def __init__(self):
         '''read in the books'''

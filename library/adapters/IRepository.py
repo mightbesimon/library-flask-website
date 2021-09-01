@@ -13,5 +13,10 @@ class IRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def get_books(self):
+    def get_all_books(self):
+        '''an alias to get_catalogue'''
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_book(self, **kwargs):
         raise NotImplementedError

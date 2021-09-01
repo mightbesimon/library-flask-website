@@ -20,8 +20,8 @@ def create_app():
     def home():
         return render_template('catalogue.html', catalogue=_repo.get_catalogue())
 
-    @app.route('/book/<id>')
-    def book(id):
-        return render_template('simple_book.html', book=_repo.get_book_by_id(id))
+    @app.route('/book/<bookID>')
+    def book(bookID):
+        return render_template('simple_book.html', book=_repo.get_book(book_id=int(bookID)))
 
     return app

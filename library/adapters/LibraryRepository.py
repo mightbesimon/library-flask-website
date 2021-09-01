@@ -14,9 +14,10 @@ class LibraryRepository(IRepository):
     def get_catalogue(self):
         return self._database.catalogue
 
-    def get_books(self):
+    def get_all_books(self):
+        '''an alias to get_catalogue'''
         return self._database.books
 
-    def get_book_by_id(self, id):
-        book, *_ = [book for book in self._database.catalogue if book.book_id==int(id)]
-        return book
+    def get_book(self, **kwargs):
+        '''uses LINQ support in DataSet class'''
+        return self._database.books.first_or_default(**kwargs)
