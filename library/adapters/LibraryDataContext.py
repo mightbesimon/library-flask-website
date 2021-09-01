@@ -17,14 +17,13 @@ class LibraryDataContext:
     @property
     def catalogue(self) -> DataSet:
         '''the catalogue of books of the library
-           contains both books and authors within the book model'''
+           contains data from both book and author json files'''
         return self._catalogue
 
     @property
     def books(self) -> DataSet:
         '''an alias for catalogue
-           Normally would be a db table of books, but since the book model
-           stores author objects within, it's unsuitable data for a table.'''
+           the catalogue includes books but also authors'''
         return self._catalogue
     
     @property
