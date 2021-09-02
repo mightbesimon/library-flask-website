@@ -1,4 +1,5 @@
-''' copyright Simon Shan 2021
+''' Copyright 2021 mightbesimon | github.com/mightbesimon
+    All rights reserved.
 '''
 
 class DataSet(list):
@@ -28,3 +29,9 @@ usage examples:
     def select(self, function=None):
         '''returns a DataSet to allow chaining queries'''
         return type(self)(function(item) for item in self)
+
+    def order_by(self, function):
+        ...
+
+    def then_by(self, function):
+        ...

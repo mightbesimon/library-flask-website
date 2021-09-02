@@ -1,0 +1,44 @@
+compsci235-assignment2-covid-19/
+├── .github/
+│   └── ...
+├── .gitignore
+├── library/
+│   ├── adapters/
+│   │   ├── __init__.py
+│   │   ├── jsondatareader.py
+│   │   ├── DataSet.py
+│   │   ├── LibraryDataContext.py
+│   │   ├── IRepository.py
+│   │   └── LibraryRepository.py
+│   ├── data/
+│   │   ├── book_authors_excerpt.json
+│   │   └── comic_books_excerpt.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── publisher.py
+│   │   ├── author.py
+│   │   ├── book.py
+│   │   ├── review.py
+│   │   └── user.py
+│   ├── blueprints/
+│   │   └── ...
+│   ├── services/
+│   │   └── ...
+│   ├── templates/
+│   │   ├── ...
+│   │   ├── layout.html
+│   │   └── navigation.html
+│   └── __init__.py
+├── tests/
+│   ├── ...
+│   └── unit/
+│       ├── test_adapters.py
+│       └── test_domain_model.py
+├── venv/
+│   └── ...
+├── requirements.txt
+├── README.md
+├── .env
+├── config.py
+├── utils.py
+└── wsgi.py
