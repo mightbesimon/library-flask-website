@@ -26,6 +26,6 @@ def create_app():
 
     @app.route('/book/<bookID>')
     def book(bookID):
-        return render_template('simple_book.html', book=_repo.get_book(book_id=int(bookID)))
+        return render_template('book_info.html', book=_repo.get_book(book_id=int(bookID)))
 
     return app

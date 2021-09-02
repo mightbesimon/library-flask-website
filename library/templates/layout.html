@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-    <meta charset='UTF-8'>
     <title>Library</title>
+    <meta charset='UTF-8'>
     <style type="text/css">
+        body {
+            /*background: #ffefd5; /*PapayaWhip*/
+            background: #fff8ea; /*PapayaWhip*/
+            font-size: 20px;
+        }
         a {
-            color: #000;
+            color: #50594e;
             text-decoration: none;
         }
         a:hover {
@@ -17,7 +22,9 @@
             position: fixed;
             width: 240px;
             height: 100%;
-            background: #4B8C54;
+            /*background: #4B8C54;*/
+            background: #9890ab;
+            /*background: #869e8e;*/
             color: #fff;
             padding-left: 20px;
         }
@@ -36,9 +43,13 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            /*color: #677566;*/
+            color: #50594e;
         }
         main h1 {
-            color: #4B8C54;
+            /*color: #4B8C54;*/
+            /*color: #9ab5a1;*/
+            color: #889e8b;
         }
     </style>
 </head>
@@ -48,7 +59,7 @@
     </nav>
     <main>
         {% block main %} {% endblock %}
-        <footer>copyright mightbesimon 2021 | github.com/mightbesimon</footer>
+        <!-- <footer>copyright mightbesimon 2021 | github.com/mightbesimon</footer> -->
     </main>
 </body>
 </html>
