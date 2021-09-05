@@ -3,7 +3,7 @@
     Simon Shan  441147157
 '''
 
-from library.models import key_property, BaseModel
+from . import key_property, BaseModel
 
 
 class Publisher(BaseModel):

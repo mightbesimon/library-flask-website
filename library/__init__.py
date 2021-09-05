@@ -6,7 +6,7 @@
 from flask import Flask, render_template, redirect, url_for
 
 from config import EnvConfig
-from library.adapters.LibraryRepository import LibraryRepository
+from .adapters.LibraryRepository import LibraryRepository
 
 
 _repo = LibraryRepository()

@@ -3,8 +3,8 @@
     Simon Shan  441147157
 '''
 
-from library.adapters.jsondatareader import BooksJSONReader
-from library.adapters.DataSet import DataSet
+from .jsondatareader import BooksJSONReader
+from .DataSet import DataSet
 
 # path constants
 DATA_DIRECTORY   = 'library/data/'

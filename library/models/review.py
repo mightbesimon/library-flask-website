@@ -5,8 +5,8 @@
 
 from datetime import datetime
 
-from library.models import key_property, BaseModel
-from library.models import Book
+from . import key_property, BaseModel
+from . import Book
 
 
 class Review(BaseModel):

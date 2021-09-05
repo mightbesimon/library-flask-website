@@ -3,8 +3,8 @@
     Simon Shan  441147157
 '''
 
-from library.adapters.IRepository import IRepository
-from library.adapters.LibraryDataContext import LibraryDataContext
+from .IRepository import IRepository
+from .LibraryDataContext import LibraryDataContext
 
 class LibraryRepository(IRepository):
 

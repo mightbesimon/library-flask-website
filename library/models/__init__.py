@@ -23,10 +23,10 @@ class BaseModel:
 
 
 #======[!] * * *   help with imports   * * * [!]======#
-from library.models.publisher import Publisher
-from library.models.author    import Author
-from library.models.book      import Book
-from library.models.review    import Review
-from library.models.user      import User
-from library.models.inventory import BooksInventory
+from .publisher import Publisher
+from .author    import Author
+from .book      import Book
+from .review    import Review
+from .user      import User
+from .inventory import BooksInventory
 #======[!] * * *   help with imports   * * * [!]======#

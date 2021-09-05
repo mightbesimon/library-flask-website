@@ -5,8 +5,8 @@
 
 from typing import List
 
-from library.models import key_property, BaseModel
-from library.models import Book, Review
+from . import key_property, BaseModel
+from . import Book, Review
 
 
 class User(BaseModel):

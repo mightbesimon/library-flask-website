@@ -6,7 +6,7 @@
 import json
 from typing import List
 
-from library.models import Publisher, Author, Book
+from ..models import Publisher, Author, Book
 
 
 class BooksJSONReader:
