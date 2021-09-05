@@ -6,6 +6,15 @@ from utils import get_project_root
 from library.models import Publisher, Author, Book, Review, User, BooksInventory
 from library.adapters.jsondatareader import BooksJSONReader
 
+class TestBaseModel:
+
+    def test_key_property_conflict(self):
+        luke =   Book(1, 'Luke')
+        john = Author(1, 'John')
+        mark = Author(1, 'Mark')
+        assert john != luke
+        assert john == mark
+
 class TestPublisher:
 
     def test_construction(self):
