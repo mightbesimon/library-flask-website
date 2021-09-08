@@ -454,6 +454,12 @@ class TestBooksJSONReader:
         dataset_of_books = read_books_and_authors
         assert dataset_of_books[17].title == "續．星守犬"
 
+    def test_read_books_from_file_and_check_added_attributes(self, read_books_and_authors):
+        dataset_of_books = read_books_and_authors
+        assert dataset_of_books[1].image_url == 'https://images.gr-assets.com/books/1462644346m/30128855.jpg'
+        # I just realised no similar books match any books in the dataset
+        assert dataset_of_books[1].language  == 'French'
+
 class TestBooksInventory:
 
     def test_construction_and_find(self):
