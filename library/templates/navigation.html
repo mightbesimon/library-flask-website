@@ -7,9 +7,7 @@
                      ('/Contact'    , 'Contact'      ),
 ) %}
     <a href="{{ url }}">
-        <h2 {% if url_for(request.endpoint, **request.view_args)==url %}
-                    style="margin-left: 5%; padding-left: 5%; border-radius: .5rem 0 0 .5rem;
-                    background: var(--main); color: var(--text); " {% endif %}>
+        <h2 {% if url_for(request.endpoint, **request.view_args)==url %} class="current" {% endif %}>
             {{ name }}
         </h2>
     </a>

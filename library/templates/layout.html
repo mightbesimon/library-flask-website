@@ -7,6 +7,7 @@
         :root {
             /* colour palette */
             --cream : hsl(40, 100%, 96%);
+            --cream-light:hsl(40, 100%, 98%);
             --coffee: hsl(40,  14%, 62%);
             --purple: hsl(258, 14%, 62%);
             --dark  : hsl(109,  7%, 33%);
@@ -14,18 +15,23 @@
             --green2: hsl(140, 15%, 55%);
             --green2-dark: hsl(140, 11%, 36%);
 
-            /**/
-            /*--nav : var(--purple);*/
-            --nav : var(--green2-dark);
+            /*  */
+            --shadow-in: inset 1px .15rem .3rem -.1rem rgba(50, 50, 93, 0.25), inset 1px .1rem .2rem -.1rem rgba(0, 0, 0, 0.3), inset -1px -1px .3rem -.1rem rgba(50, 50, 93, 0.25), inset -1px -1px .2rem -.1rem rgba(0, 0, 0, 0.3);
+            --shadow-nav: inset .3rem .3rem .6rem -.2rem rgba(50, 50, 93, 0.25), inset .2rem .2rem .4rem -.2rem rgba(0, 0, 0, 0.3);
+
+            /* themes */
+            --nav-bg   : var(--green2-dark);
             --nav-text : white;
             --nav-hover: hsl(140, 11%, 27%);
-            --main: var(--cream );
-            --text: var(--dark  );
+            --main     : var(--cream );
+            --text     : var(--dark  );
+            --highlight: var(--green);
+            --card     : var(--cream-light);
         }
         html, body {
             margin: 0;
-            background: var(--nav);
             font-size: 1.5vw;
+            background: var(--nav-bg);
             transition: all .5s ease;
         }
         a {
@@ -41,28 +47,33 @@
             left: 0;
             width: 18%;
             height: 100vh;
-
-            background: var(--nav);
+            background: var(--nav-bg);
         }
         nav h2 {
             margin: 0;
-            height: 1.8rem;
             padding: 10%;
             padding-right: 0 !important;
+            height: 1.8rem;
 
-            background: var(--nav);
+            background: var(--nav-bg);
             color: var(--nav-text);
-
-            display: flex;
-            flex-direction: column;
             transition: margin .5s, padding .5s, border .5s, background .5s, color .3s;
         }
+        nav h2.current {
+            margin-left: 5%;
+            padding-left: 5%;
+            border-radius: .5rem 0 0 .5rem;
+            box-shadow: var(--shadow-nav);
+            background: var(--main); color: var(--text);
+        }
         nav h2:hover {
-            margin: 0 !important;
-            padding: 10% !important;
-            border-radius: 0 !important; 
-            background: var(--nav-hover) !important;
-            color: var(--nav-text) !important;
+            margin: 0;
+            padding: 10%;
+            padding-left: 15%;
+            border-radius: 0; 
+            box-shadow: var(--shadow-nav);
+            background: var(--nav-hover);
+            color: var(--nav-text);
         }
         main {
             padding-left: 22.5%;
@@ -78,6 +89,19 @@
         main h1 {
             color: var(--green2);
         }
+        footer {
+            margin-top: auto;
+            margin-bottom: .35rem;
+            padding: .25rem;
+            padding-right: 2.5rem;
+            border-radius: .25rem;
+
+            font: .5rem sans-serif;
+            text-align: right;
+
+            background: var(--card);
+            box-shadow: var(--shadow-in);
+        }
     </style>
 </head>
 <body>
@@ -86,7 +110,7 @@
     </nav>
     <main>
         {% block main %} {% endblock %}
-        <!-- <footer>copyright mightbesimon 2021 | github.com/mightbesimon</footer> -->
+        <footer>Copyright 2021 mightbesimon | github.com/mightbesimon</footer>
     </main>
 </body>
 </html>
