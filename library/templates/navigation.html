@@ -4,7 +4,7 @@
                      ('/suggestions', 'Suggestions'  ),
                      ('/catalogue'  , 'Our Catalogue'),
                      ('/aboutus'    , 'About Us'     ),
-                     ('/Contact'    , 'Contact'      ),
+                     ('/contact'    , 'Contact'      ),
 ) %}
     <a href="{{ url }}">
         <h2 {% if url_for(request.endpoint, **request.view_args)==url %} class="current" {% endif %}>
