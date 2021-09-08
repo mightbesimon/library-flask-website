@@ -1,19 +1,16 @@
-<!-- <h1>Navigation</h1> -->
-<a href="/">
-    <h2>Home</h2>
-</a>
-<a href="/register">
-    <h2>Register</h2>
-</a>
-<a href="/login">
-    <h2>Login</h2>
-</a>
-<a href="/catalogue">
-    <h2>Our Catalogue</h2>
-</a>
-<a href="/aboutus">
-    <h2>About Us</h2>
-</a>
-<a href="/contact">
-    <h2>Contact</h2>
-</a>
+{% for url, name in (('/'           , 'Home'         ),
+                     ('/register'   , 'Register'     ),
+                     ('/login'      , 'Login'        ),
+                     ('/suggestions', 'Suggestions'  ),
+                     ('/catalogue'  , 'Our Catalogue'),
+                     ('/aboutus'    , 'About Us'     ),
+                     ('/Contact'    , 'Contact'      ),
+) %}
+    <a href="{{ url }}">
+        <h2 {% if url_for(request.endpoint, **request.view_args)==url %}
+                    style="margin-left: 5%; padding-left: 5%; border-radius: .5rem 0 0 .5rem;
+                    background: var(--main); color: var(--text); " {% endif %}>
+            {{ name }}
+        </h2>
+    </a>
+{% endfor %}

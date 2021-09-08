@@ -4,52 +4,79 @@
     <title>Library</title>
     <meta charset='UTF-8'>
     <style type="text/css">
-        body {
-            /*background: #ffefd5; /*PapayaWhip*/
-            background: #fff8ea; /*PapayaWhip*/
-            font-size: 20px;
+        :root {
+            /* colour palette */
+            --cream : hsl(40, 100%, 96%);
+            --coffee: hsl(40,  14%, 62%);
+            --purple: hsl(258, 14%, 62%);
+            --dark  : hsl(109,  7%, 33%);
+            --green : hsl(128, 30%, 42%);
+            --green2: hsl(140, 15%, 55%);
+            --green2-dark: hsl(140, 11%, 36%);
+
+            /**/
+            /*--nav : var(--purple);*/
+            --nav : var(--green2-dark);
+            --nav-text : white;
+            --nav-hover: hsl(140, 11%, 27%);
+            --main: var(--cream );
+            --text: var(--dark  );
+        }
+        html, body {
+            margin: 0;
+            background: var(--nav);
+            font-size: 1.5vw;
+            transition: all .5s ease;
         }
         a {
-            color: #50594e;
+            color: var(--text);
             text-decoration: none;
         }
         a:hover {
-            color: #4B8C54;
+            color: var(--green);
         }
         nav {
-            top: 0px;
-            left: 0px;
             position: fixed;
-            width: 240px;
-            height: 100%;
-            /*background: #4B8C54;*/
-            background: #9890ab;
-            /*background: #869e8e;*/
-            color: #fff;
-            padding-left: 20px;
+            top: 0;
+            left: 0;
+            width: 18%;
+            height: 100vh;
+
+            background: var(--nav);
         }
-        nav h1 {
-            color: #000;
-        }
-        nav a {
-            color: #fff;
-        }
-        nav a:hover {
-            color: #000;
-        }
-        main {
-            margin-left: 300px;
-            margin-right: 80px;
-            height: 100%;
+        nav h2 {
+            margin: 0;
+            height: 1.8rem;
+            padding: 10%;
+            padding-right: 0 !important;
+
+            background: var(--nav);
+            color: var(--nav-text);
+
             display: flex;
             flex-direction: column;
-            /*color: #677566;*/
-            color: #50594e;
+            transition: margin .5s, padding .5s, border .5s, background .5s, color .3s;
+        }
+        nav h2:hover {
+            margin: 0 !important;
+            padding: 10% !important;
+            border-radius: 0 !important; 
+            background: var(--nav-hover) !important;
+            color: var(--nav-text) !important;
+        }
+        main {
+            padding-left: 22.5%;
+            padding-right: 7.5%;
+            min-height: 100vh;
+
+            background: var(--main);
+            color: var(--text);
+
+            display: flex;
+            flex-direction: column;
         }
         main h1 {
-            /*color: #4B8C54;*/
-            /*color: #9ab5a1;*/
-            color: #889e8b;
+            color: var(--green2);
         }
     </style>
 </head>
