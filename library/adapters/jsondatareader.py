@@ -9,6 +9,16 @@ from typing import List
 from ..models import Publisher, Author, Book
 
 
+language_codes = {
+    'en-US': 'English (American)', 
+    'eng': 'English' , 
+    'fre': 'French'  , 
+    'spa': 'Spanish' , 
+    'kor': 'Korean'  , 
+    'jpn': 'Japanese', 
+    'zho': 'Chinese' ,
+}
+
 class BooksJSONReader:
 
     def __init__(self, filename_books: str, filename_authors: str):
@@ -57,6 +67,9 @@ class BooksJSONReader:
                     book.ebook = False
                 if book_data['num_pages']:                                  # num pages
                     book.num_pages = int(book_data['num_pages'])
+                if book_data['language_code']:                              # language code
+                    code = book_data['language_code']
+                    book.language = language_codes[code]
 
                 books_authors[book_id] = book_data['authors']               # book authors
                 books_similar[book_id] = book_data['similar_books']         # similar books

@@ -26,6 +26,7 @@ class Book(BaseModel):
         self.__num_pages    = None
         self.__image_url    = None
         self.__similar_books= []
+        self.__language     = None
 
     def __repr__(self):
         return f'<Book {self.title}, book id = {self.book_id}>'
@@ -115,3 +116,9 @@ class Book(BaseModel):
     def similar_books(self, similar_books: List['Book']):
         self.__similar_books = similar_books
     
+    @property
+    def language(self) -> str:
+        return self.__language
+    @language.setter
+    def language(self, language_code: str):
+        self.__language = language_code
