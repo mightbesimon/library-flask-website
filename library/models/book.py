@@ -18,12 +18,14 @@ class Book(BaseModel):
         self.__book_id = book_id
         self.title     = book_title     #  use setter
 
-        self.__description = None
-        self.__publisher   = None
-        self.__authors     = []
-        self.__release_year= None
-        self.__ebook       = None
-        self.__num_pages   = None
+        self.__description  = None
+        self.__publisher    = None
+        self.__authors      = []
+        self.__release_year = None
+        self.__ebook        = None
+        self.__num_pages    = None
+        self.__image_url    = None
+        self.__similar_books= []
 
     def __repr__(self):
         return f'<Book {self.title}, book id = {self.book_id}>'
@@ -96,3 +98,20 @@ class Book(BaseModel):
     def num_pages(self, num_pages: int):
         if isinstance(num_pages, int) and num_pages >= 0:
             self.__num_pages = num_pages
+
+    @property
+    def image_url(self) -> str:
+        return self.__image_url
+    @image_url.setter
+    def image_url(self, image_url: str):
+        if not isinstance(image_url, str) or not image_url.strip():
+            raise ValueError
+        self.__image_url = image_url.strip()
+
+    @property
+    def similar_books(self) -> List['Book']:
+        return self.__similar_books
+    @similar_books.setter
+    def similar_books(self, similar_books: List['Book']):
+        self.__similar_books = similar_books
+    
