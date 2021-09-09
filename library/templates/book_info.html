@@ -2,39 +2,56 @@
 
 
 {% block main %}
-    <h1>{{ book.title }}</h1>
-    {% if book.ebook %}
-        <h2 style='color: #4b8c54;'>eBook avaliable!</h2>
-    {% endif %}
-    <dl>
-    {% if book.release_year %}
-        <dt>Release year:</dt>
-        <dd><b>{{ book.release_year }}</b></dd>
-        <br>
-    {% endif %}
-    {% if book.description %}
-        <dt>Description:</dt>
-        <dd>{{ book.description }}</dd>
-        <br>
-    {% endif %}
-    {% if book.num_pages %}
-        <dt>Pages:</dt>
-        <dd><b>{{ book.num_pages }}</b></dd>
-        <br>
-    {% endif %}
-    {% if book.authors %}
-        <dt>Authors:</dt>
-        <ul>
-        {% for author in book.authors %}
-            <li>{{ author.full_name }}</li>
-        {% endfor %}
-        </ul>
-        <br>
-    {% endif %}
-    {% if book.publisher.name != 'N/A' %}
-        <dt>Publisher:</dt>
-        <dd>{{ book.publisher.name }}</dd>
-        <br>
-    {% endif %}
-    </dl>
+    <section class="book-info">
+        <article class="info">
+            <h1 class="title">{{ book.title }}</h1>
+            {% if book.authors %}
+                <h2 class="authors">
+                    By: 
+                    {% for author in book.authors[:-1] %}
+                        {{ author.full_name }},
+                    {% endfor %}
+                    {{ book.authors[-1].full_name }}
+                </h2>
+            {% endif %}
+            <p class="year pages publisher">
+                {% if book.release_year %}
+                    Year: <b>{{ book.release_year }}</b> &emsp;
+                {% endif %}
+                {% if book.language %}
+                    Language: {{ book.language }} &emsp;
+                {% endif %}
+                {% if book.num_pages %}
+                    Pages: <b>{{ book.num_pages }}</b> &emsp;
+                {% endif %}
+                {% if book.publisher.name != 'N/A' %}
+                    Publisher: {{ book.publisher.name }}
+                {% endif %}
+            </p>
+            {% if book.description %}
+                <p class="description">{{ book.description }}</p>
+            {% endif %}
+        </article>
+        <div class="image-card">
+            <img src="{{ book.image_url }}" alt="{{ book.title }}" width="100%" height="auto">
+            {% if book.ebook %}
+                <h3 class="ebook">eBook avaliable!</h3>
+            {% endif %}
+            <a href="">
+                <h4 class="button read">Mark as read</h4>
+            </a>
+            <a href="">
+                <h4 class="button review">Write a review</h4>
+            </a>
+        </div>
+    </section>
+
+    <section class="reviews">
+        <h2>Reviews</h2>
+        {% if not reviews %}
+            <p class="no-reviews">no reviews yet</p>
+        {% else %}
+
+        {% endif %}
+    </section>
 {% endblock %}
