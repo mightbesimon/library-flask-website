@@ -41,6 +41,9 @@ class Book(BaseModel):
         if isinstance(author, Author) and author in self.__authors:
             self.__authors.remove(author)
 
+    def short_title(self, ch=56):
+        return self.title[:ch]+'...' if len(self.title) > ch else self.title
+
     ####################   properties   ####################
     @key_property
     def book_id(self) -> int:

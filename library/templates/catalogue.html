@@ -3,9 +3,15 @@
 
 {% block main %}
     <h1>Catalogue</h1>
-    <ul>
+    <section class="image-table">
         {% for book in catalogue %}
-            <li><a href="book/{{ book.book_id }}">{{ book.title }}</a></li>
+            <div class="card">
+                <a href="/book/{{ book.book_id }}">
+                    <!-- <img src="{{ book.image_url }}" alt="{{ book.title }}" width="19.5%" height="auto" align="center"> -->
+                    <img src="{{ book.image_url }}" alt="{{ book.title }}" width="100%" height="auto">
+                    <div class="title">{{ book.short_title() }}</div>
+                </a>
+            </div>
         {% endfor %}
-    </ul>
+    </section>
 {% endblock %}

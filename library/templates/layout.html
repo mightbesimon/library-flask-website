@@ -13,14 +13,21 @@
             --purple     : hsl(258, 14%, 62%);
             --dark       : hsl(109,  7%, 33%);
             --green      : hsl(128, 30%, 42%);
+            --green-dark : hsl(128, 72%, 36%);
             --green2     : hsl(140, 15%, 55%);
             --green2-dark: hsl(140, 11%, 36%);
 
             /* shadows */
-            --shadow-in: inset 1px .15rem .3rem -.1rem rgba(50, 50, 93, 0.25), inset 1px .1rem .2rem -.1rem rgba(0, 0, 0, 0.3), inset -1px -1px .3rem -.1rem rgba(50, 50, 93, 0.25), inset -1px -1px .2rem -.1rem rgba(0, 0, 0, 0.3);
-            --shadow-nav: .3rem 0 .6rem rgba(50, 93, 50, 0.25), .2rem 0 .4rem rgba(0, 0, 0, 0.3);
-            --shadow-current: inset .3rem .3rem .6rem -.2rem rgba(50, 50, 93, 0.25), inset .2rem .2rem .4rem -.2rem rgba(0, 0, 0, 0.3);
-            --shadow-hover: inset 1px .3rem .6rem -.2rem rgba(50, 50, 93, 0.25), inset 1px .2rem .4rem -.2rem rgba(0, 0, 0, 0.3), inset -1px -1px .6rem -.2rem rgba(50, 50, 93, 0.25), inset -1px -1px .4rem -.2rem rgba(0, 0, 0, 0.3);
+            --shadow       : rgba( 0,  0,  0, .3 );
+            --shadow-blue  : rgba(50, 50, 93, .25);
+            --shadow-green : hsla(128, 50%, 42%, .25);
+            --shadow-purple: hsla(258, 64%, 62%, .25);
+            --shadow-in: inset 1px .15rem .3rem -.1rem var(--shadow-blue), inset 1px .1rem .2rem -.1rem var(--shadow), inset -1px -1px .3rem -.1rem var(--shadow-blue), inset -1px -1px .2rem -.1rem var(--shadow);
+            --shadow-nav: .3rem 0 .6rem var(--shadow-green), .2rem 0 .4rem var(--shadow);
+            --shadow-current: inset .3rem .3rem .6rem -.2rem var(--shadow-blue), inset .2rem .2rem .4rem -.2rem var(--shadow);
+            --shadow-hover: inset 1px .3rem .6rem -.2rem var(--shadow-blue), inset 1px .2rem .4rem -.2rem var(--shadow), inset -1px -1px .6rem -.2rem var(--shadow-blue), inset -1px -1px .4rem -.2rem var(--shadow);
+            --shadow-card: 1px .6rem 1.2rem -.4rem var(--shadow-blue), 1px .4rem .8rem -.4rem var(--shadow), -1px -1px 1.2rem -.4rem var(--shadow-blue), -1px -1px .8rem -.4rem var(--shadow);
+            --shadow-card2: 1px .6rem 1.2rem var(--shadow-purple), 1px .4rem .8rem var(--shadow), -1px -1px 1.2rem var(--shadow-purple), -1px -1px .8rem var(--shadow);
 
             /* themes */
             --nav-bg   : var(--green2-dark);
@@ -29,7 +36,9 @@
             --main     : var(--cream );
             --text     : var(--dark  );
             --highlight: var(--green);
-            --footer   : var(--cream-light);
+            --heading  : var(--green2);
+            --footer   : var(--cream-dark);
+            --card     : var(--cream-light);
         }
         html, body {
             margin: 0;
@@ -38,11 +47,8 @@
             transition: all .5s ease;
         }
         a {
-            color: var(--text);
-            text-decoration: none;
-        }
-        a:hover {
-            color: var(--green);
+            color: inherit;
+            text-decoration: inherit;
         }
         nav {
             position: fixed;
@@ -79,6 +85,7 @@
             background: var(--nav-hover);
             color: var(--nav-text);
         }
+
         main {
             padding-left: 22.5%;
             padding-right: 7.5%;
@@ -91,8 +98,38 @@
             flex-direction: column;
         }
         main h1 {
-            color: var(--green2);
+            text-shadow: 0 0 .175rem var(--heading);
+            color: var(--heading);
         }
+        main section.image-table {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        main section.image-table div.card {
+            margin: 1rem;
+            flex: 1 1 20%;
+            border-radius: 1rem;
+
+            box-shadow: var(--shadow-card);
+            background: var(--card);
+            transition: box-shadow .5s ease;
+        }
+        main section.image-table div.card img {
+            display: block;
+            height: auto;
+            border-radius: 1rem 1rem 0 0;
+        }
+        main section.image-table div.card div.title {
+            padding: .8rem;
+            border-radius: 0 0 1rem 1rem;
+            font: .8rem sans-serif;
+        }
+        main section.image-table div.card:hover {
+            /*margin: 0;*/
+            /*flex: 5 1 20%;*/
+            box-shadow: var(--shadow-card2);
+        }
+
         footer {
             margin-top: auto;
             margin-bottom: .35rem;
