@@ -40,6 +40,11 @@ class TestDataSet:
         assert container2 in container_dataset.where()
         assert container3 in container_dataset.where()
 
+        # test function
+        assert container1 in container_dataset.where(function=lambda c: c.x in [11, 99])
+        assert container3 in container_dataset.where(lambda c: c.x in [11, 99])
+        assert container3 not in container_dataset.where(lambda c: c.x in [11])
+
     def test_linq_first_or_default(self):
         container1 = Container(11, 11)
         container2 = Container(11, 99)

@@ -11,14 +11,17 @@ usage examples:
     _database.author.first_or_default(full_name='Ronald J. Fields', EmptyAuthor())
                                                             # get the first author with the name Ronald J. Fields
                                                             # or return an EmptyAuthor()
+    _database.books.where(lambda book: book.id in [1,2,3])  # get books with id 1, 2 and 3
     '''
-    def where(self, **kwargs):
+    def where(self, function=None, **kwargs):
         '''returns a DataSet to allow chaining queries'''
-        # helper
-        is_match = lambda item: all(getattr(item, attribute)==value for attribute, value in kwargs.items())
+        
+        # if no specified function, use kwargs for matches
+        if not function:
+            function = lambda item: all(getattr(item, attribute)==value for attribute, value in kwargs.items())
 
         # returns a DataSet to allow chaining queries
-        return type(self)(item for item in self if is_match(item))
+        return type(self)(item for item in self if function(item))
 
 
     def first_or_default(self, default=None, **kwargs):
@@ -28,7 +31,7 @@ usage examples:
 
     def select(self, function=None):
         '''returns a DataSet to allow chaining queries'''
-        return type(self)(function(item) for item in self)
+        return type(self)(map(function, self))
 
     def order_by(self, function):
         ...
