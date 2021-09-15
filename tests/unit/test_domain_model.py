@@ -6,6 +6,7 @@ from utils import get_project_root
 from library.models import Publisher, Author, Book, Review, User, BooksInventory
 from library.adapters.jsondatareader import BooksJSONReader
 
+######################### simon:tests ##########################
 class TestBaseModel:
 
     def test_key_property_conflict(self):
@@ -14,6 +15,7 @@ class TestBaseModel:
         mark = Author(1, 'Mark')
         assert john != luke
         assert john == mark
+######################### simon:tests ##########################
 
 class TestPublisher:
 
@@ -454,11 +456,13 @@ class TestBooksJSONReader:
         dataset_of_books = read_books_and_authors
         assert dataset_of_books[17].title == "續．星守犬"
 
+    ######################### simon:tests ##########################
     def test_read_books_from_file_and_check_added_attributes(self, read_books_and_authors):
         dataset_of_books = read_books_and_authors
         assert dataset_of_books[1].image_url == 'https://images.gr-assets.com/books/1462644346m/30128855.jpg'
         # I just realised no similar books match any books in the dataset
         assert dataset_of_books[1].language  == 'French'
+    ######################### simon:tests ##########################
 
 class TestBooksInventory:
 

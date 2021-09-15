@@ -12,10 +12,10 @@ from . import Book, Review
 class User(BaseModel):
 
     def __init__(self, username: str, password: str):
-        self.__username  = username.strip().lower() \
+        self.__username = username.strip().lower() \
             if isinstance(username, str) and username.strip() \
             else None
-        self.__password   = password \
+        self.__password = password \
             if isinstance(password,  str) and len(password)>=7  \
             else None
         self.__read_books = []
