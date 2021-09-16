@@ -199,10 +199,15 @@ main section.book-info div.image-card img {
     height: auto;
     border-radius: 0.5rem;
 }
-main section.book-info div.image-card h3.ebook {
-    margin-top: 1rem;
-    margin-bottom: 0.8rem;
+main section.book-info div.image-card h5.ebook {
+    margin: 1rem .5rem 0 .5rem;
+    padding: .2rem;
+    border-radius: .2rem;
+
+    font-family: sans-serif;
     text-align: center;
+    box-shadow: var(--shadow-in);
+    background: var(--main);
     color: var(--green-vibr);
 }
 main section.book-info div.image-card h4.button {
