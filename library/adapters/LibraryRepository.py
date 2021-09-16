@@ -19,6 +19,9 @@ class LibraryRepository(IRepository):
         entry = self._database.users.add(user)
         return entry
 
+    def authenticate_user(self, username, password):
+        return self._database.users.any(username=username, password=password)
+
     def get_catalogue(self):
         return self._database.catalogue
 
