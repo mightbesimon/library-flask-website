@@ -17,6 +17,19 @@ class Container:
     def __repr__(self):
         return f'x{self.x}y{self.y}'
 
+@pytest.fixture
+def container1():
+    return Container(11, 11)
+@pytest.fixture
+def container2():
+    return Container(11, 99)
+@pytest.fixture
+def container3():
+    return Container(99, 11)
+@pytest.fixture
+def container_dataset(container1, container2, container3):
+    return DataSet([container1, container2, container3])
+
 class TestDataSet:
 
     def test_initialisation(self):
@@ -24,11 +37,9 @@ class TestDataSet:
         list1 = [1, 2, 3]
         assert repr(DataSet(list1))=='[1, 2, 3]'
 
-    def test_linq_where(self):
-        container1 = Container(11, 11)
-        container2 = Container(11, 99)
-        container3 = Container(99, 11)
-        container_dataset = DataSet([container1, container2, container3])
+    def test_linq_where(self, container1, container2, container3, container_dataset):
+        # test return type dataset
+        assert isinstance(container_dataset.where(x=11), DataSet)
 
         # test kwargs
         assert container1 in container_dataset.where(x=11)
@@ -45,12 +56,7 @@ class TestDataSet:
         assert container3 in container_dataset.where(lambda c: c.x in [11, 99])
         assert container3 not in container_dataset.where(lambda c: c.x in [11])
 
-    def test_linq_first_or_default(self):
-        container1 = Container(11, 11)
-        container2 = Container(11, 99)
-        container3 = Container(99, 11)
-        container_dataset = DataSet([container1, container2, container3])
-
+    def test_linq_first_or_default(self, container1, container2, container3, container_dataset):
         # test kwargs
         assert container3 is container_dataset.first_or_default(x=99)
         assert container3 is container_dataset.first_or_default(x=99, default=container1)
@@ -64,15 +70,22 @@ class TestDataSet:
         # test no kwargs
         assert container1 is container_dataset.first_or_default(container3)
 
-    def test_linq_select(self):
-        container1 = Container(11, 11)
-        container2 = Container(11, 99)
-        container3 = Container(99, 11)
-        container_dataset = DataSet([container1, container2, container3])
-
+    def test_linq_select(self, container1, container2, container3, container_dataset):
         x_dataset = container_dataset.select(lambda container: container.x)
         assert isinstance(x_dataset, DataSet)
         assert x_dataset==[11, 11, 99]
+
+    def test_linq_any(self, container1, container2, container3, container_dataset):
+        assert True ==container_dataset.any(x=11)
+        assert False==container_dataset.any(x=19)
+        assert True ==container_dataset.any(x=11, y=99)
+        assert True ==container_dataset.any(lambda container: container.x+container.y==110)
+        assert False==container_dataset.any(lambda container: container.x+container.y==100)
+
+    def test_linq_all(self, container1, container2, container3, container_dataset):
+        assert False==container_dataset.all(x=11)
+        container_dataset.pop()
+        assert True==container_dataset.all(x=11)
 
 
 @pytest.fixture

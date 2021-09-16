@@ -12,7 +12,17 @@ usage examples:
                                                             # get the first author with the name Ronald J. Fields
                                                             # or return an EmptyAuthor()
     _database.books.where(lambda book: book.id in [1,2,3])  # get books with id 1, 2 and 3
+    _database.books.where(lambda book: book.release_year<2021 and book.ebook)
+                                                            # get all books before 2021 and only ebooks
+    _database.users.any(username='jamesbond')               # check if username jamesbond already exists
+    _database.users.any(username='bond', password='007')    # authenticate user credentials
+    _database.books.all(ebook=True)                         # check if all books are ebooks
     '''
+    def add(self, entry):
+        '''returns a copy of the entry added to the database'''
+        self.append(entry)
+        return entry
+
     def where(self, function=None, **kwargs):
         '''returns a DataSet to allow chaining queries'''
         
@@ -32,6 +42,12 @@ usage examples:
     def select(self, function=None):
         '''returns a DataSet to allow chaining queries'''
         return type(self)(map(function, self))
+
+    def any(self, function=None, **kwargs):
+        return any(self.where(function=function, **kwargs))
+
+    def all(self, function=None, **kwargs):
+        return len(self)==len(self.where(function=function, **kwargs))
 
     def order_by(self, function):
         ...
