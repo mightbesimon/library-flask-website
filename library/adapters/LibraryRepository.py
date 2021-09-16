@@ -11,6 +11,14 @@ class LibraryRepository(IRepository):
     def __init__(self):
         self._database = LibraryDataContext()
 
+    def username_exists(self, username):
+        return self._database.users.any(username=username)
+
+    def add_user(self, user):
+        '''returns a copy of the entry added to the database'''
+        entry = self._database.users.add(user)
+        return entry
+
     def get_catalogue(self):
         return self._database.catalogue
 
