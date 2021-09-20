@@ -1,14 +1,10 @@
-{% for url, name in (('/'           , 'Home'         ),
-                     ('/register'   , 'Register'     ),
-                     ('/login'      , 'Login'        ),
-                     ('/suggestions', 'Suggestions'  ),
-                     ('/catalogue'  , 'Our Catalogue'),
-                     ('/aboutus'    , 'About Us'     ),
-                     ('/contact'    , 'Contact'      ),
-) %}
-    <a href="{{ url }}">
-        <h2 {% if url_for(request.endpoint, **request.view_args)==url %} class="current" {% endif %}>
-            {{ name }}
+{% for tab in nav %}
+    <a href="{{ tab.url }}">
+        <h2 {% if tab.is_current()     %} class="current" {% endif %}
+            {% if tab.before_current() %} class="before"  {% endif %}
+            {% if tab.after_current()  %} class="after"   {% endif %}>
+            {{ tab.name }}
         </h2>
     </a>
 {% endfor %}
+<footer {% if nav.last_current() %} class="after" {% endif %}></footer>

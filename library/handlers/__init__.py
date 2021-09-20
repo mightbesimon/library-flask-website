@@ -5,3 +5,6 @@
 
 from .registration import RegistrationForm
 from .login        import LoginForm
+from .navigation   import Navigation
+
+nav = Navigation()
