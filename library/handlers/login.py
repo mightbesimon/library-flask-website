@@ -26,7 +26,7 @@ class ValidatePassword:
         self.message = message
 
     def __call__(self, form, field):
-        # if username doesn't exist, then do thing for password
+        # if username doesn't exist, then do nothing for password
         if form.username.errors:
             return
         # validate password

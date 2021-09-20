@@ -3,8 +3,23 @@
     Simon Shan  441147157
 '''
 
-from .registration import RegistrationForm
-from .login        import LoginForm
-from .navigation   import Navigation
+### authorisation policies ###
 
+from .authorisation import Policy
+from ..adapters import _repo
+
+useronly = Policy(session_key='username',
+        verification_function=_repo.username_exists)
+
+
+### nagivation sidebar ###
+
+from .navigation import Navigation
 nav = Navigation()
+
+
+#======[!] * * *   help with imports   * * * [!]======#
+from .registration  import RegistrationForm
+from .login         import LoginForm
+from .authorisation import authorisation
+#======[!] * * *   help with imports   * * * [!]======#

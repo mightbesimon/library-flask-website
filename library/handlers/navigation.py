@@ -3,9 +3,9 @@
     Simon Shan  441147157
 '''
 
-from flask import session, url_for, request
+from flask import url_for, request
 
-from ..adapters import _repo
+from . import useronly
 
 
 class Tab:
@@ -34,7 +34,7 @@ class Navigation:
     default = [
         Tab('Home'         , '/'           ),
         Tab('Register'     , '/register'   ),
-        Tab('Login'        , '/login'      ),
+        Tab('Log in'       , '/login'      ),
         Tab('Suggestions'  , '/suggestions'),
         Tab('Our Catalogue', '/catalogue'  ),
         Tab('About Us'     , '/aboutus'    ),
@@ -43,16 +43,15 @@ class Navigation:
     authenticated = [
         Tab('Home'         , '/'           ),
         Tab('Account'      , '/account'    ),
-        Tab('Logout'       , '/logout'     ),
+        Tab('Log out'      , '/logout'     ),
         Tab('Suggestions'  , '/suggestions'),
         Tab('Our Catalogue', '/catalogue'  ),
         Tab('About Us'     , '/aboutus'    ),
     ]
 
     def __getitem__(self, idx):
-        if 'username' in session and _repo.username_exists(session['username']):
-            return self.authenticated[idx]
-        return self.default[idx]
+        return self.authenticated[idx] if useronly.verify() \
+          else self.default[idx]
 
     @classmethod
     def offset_tab(cls, tab, offset):
