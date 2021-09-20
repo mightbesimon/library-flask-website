@@ -19,7 +19,3 @@ def catalogue():
 @blueprint.route('/book/<bookID>')
 def book(bookID):
     return render_template('book_info.html', nav=nav, book=_repo.get_book(book_id=int(bookID)))
-
-@blueprint.route('/')
-def home():
-    return redirect(url_for('catalogue.catalogue'))
