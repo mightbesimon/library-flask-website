@@ -6,14 +6,16 @@
 from flask import Flask
 
 from config import EnvConfig
-from .blueprints import catalogue, authentication
+from .blueprints import catalogue, authentication, account
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(EnvConfig)           # configure flask app
     
+    # register blueprints
     app.register_blueprint(authentication.blueprint)
-    app.register_blueprint(catalogue.blueprint) # register blueprints
+    app.register_blueprint(account.blueprint)
+    app.register_blueprint(catalogue.blueprint)
 
     return app

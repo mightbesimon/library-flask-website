@@ -22,6 +22,10 @@ class LibraryRepository(IRepository):
     def authenticate_user(self, username, password):
         return self._database.users.any(username=username, password=password)
 
+    def get_user(self, **kwargs):
+        '''uses LINQ support in DataSet class'''
+        return self._database.users.first_or_default(**kwargs)
+
     def get_catalogue(self):
         return self._database.catalogue
 

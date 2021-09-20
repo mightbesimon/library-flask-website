@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+
+{% block main %}
+    <h1>Kia ora {{ user.username }}!</h1>
+    <dl>
+        <dt>password</dt>
+        <dd>{{ user.password }}</dd>
+        <dt>read books</dt>
+        <dd>{{ user.read_books }}</dd>
+        <dt>reviews</dt>
+        <dd>{{ user.reviews }}</dd>
+        <dt>pages read</dt>
+        <dd>{{ user.pages_read }}</dd>
+    </dl>
+{% endblock %}
