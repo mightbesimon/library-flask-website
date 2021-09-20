@@ -3,7 +3,9 @@
     Simon Shan  441147157
 '''
 
-from typing import List
+from typing  import List
+from hashlib import sha256
+from uuid    import uuid4
 
 from . import key_property, BaseModel
 from . import Book, Review
@@ -15,7 +17,7 @@ class User(BaseModel):
         self.__username = username.strip().lower() \
             if isinstance(username, str) and username.strip() \
             else None
-        self.__password = password \
+        self.__password = self.salt_hash(password) \
             if isinstance(password,  str) and len(password)>=7  \
             else None
         self.__read_books = []
@@ -35,6 +37,14 @@ class User(BaseModel):
     def add_review(self, review: Review):
         if isinstance(review, Review):
             self.__reviews.append(review)
+
+    ##################   static methods   ##################
+    @staticmethod
+    def salt_hash(password):
+        '''salt-hash passwords for security'''
+        salt = uuid4().hex
+        salted_hash = sha256((salt+password).encode()).hexdigest()
+        return f'{salted_hash}:{salt}'
 
     ####################   properties   ####################
     @key_property

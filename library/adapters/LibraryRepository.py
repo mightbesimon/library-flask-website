@@ -3,6 +3,8 @@
     Simon Shan  441147157
 '''
 
+from hashlib import sha256
+
 from .IRepository import IRepository
 from .LibraryDataContext import LibraryDataContext
 
@@ -20,7 +22,11 @@ class LibraryRepository(IRepository):
         return entry
 
     def authenticate_user(self, username, password):
-        return self._database.users.any(username=username, password=password)
+        user = self._database.users.first_or_default(username=username)
+        if not user: return False
+        salted_hash, salt = user.password.split(':')
+        # re-salt-hash the provided password and check if match
+        return salted_hash == sha256((salt+password).encode()).hexdigest()
 
     def get_user(self, **kwargs):
         '''uses LINQ support in DataSet class'''
