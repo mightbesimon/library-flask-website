@@ -45,3 +45,5 @@ class LoginForm(FlaskForm):
         ValidatePassword(message='Incorrect password 😱'),
     ])
     submit = SubmitField('Let me in')
+    question = 'Don\'t have an account yet? Do you want to', 'register', '?'
+    url = '/register'

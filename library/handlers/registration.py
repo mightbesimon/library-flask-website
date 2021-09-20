@@ -56,3 +56,5 @@ class RegistrationForm(FlaskForm):
         ),
     ])
     submit = SubmitField('Register')
+    question = 'Already have an account? Do you want to', 'login', '?'
+    url = '/login'

@@ -288,6 +288,15 @@ main section.kia-ora form.credentials {
     flex-direction: column;
     align-items: center;
 }
+main section.kia-ora form.credentials h5 {
+    margin: 0;
+    align-self: flex-start;
+    font-family: sans-serif;
+}
+main section.kia-ora form.credentials h5 i {
+    font-style: italic;
+    color: var(--highlight);
+}
 main section.kia-ora form.credentials ul.error-box {
     margin: 0;
     padding: .75rem;
@@ -306,7 +315,6 @@ main section.kia-ora form.credentials span.required {
 }
 main section.kia-ora form.credentials input[type='text'],
 main section.kia-ora form.credentials input[type='password'] {
-    /*display: block;*/
     padding: .2rem;
     width: 20vw;
     border-radius: 0.2rem;
@@ -334,6 +342,14 @@ main section.kia-ora form.credentials input[type='submit']:hover {
     padding-bottom: .4rem;
     box-shadow: var(--shadow-hover);
     background: var(--button-hover);
+}
+main section.kia-ora form.credentials div.question {
+    margin-top: .6rem;
+    font-size: .5rem;
+}
+main section.kia-ora form.credentials div.question a {
+    font-style: italic;
+    color: var(--highlight);
 }
 
 /**************************************************************
