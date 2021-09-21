@@ -14,7 +14,7 @@ class LibraryRepository(IRepository):
         self._database = LibraryDataContext()
 
     def username_exists(self, username):
-        return self._database.users.any(username=username)
+        return self._database.users.any(username=username.lower())
 
     def add_user(self, user):
         '''returns a copy of the entry added to the database'''
@@ -22,7 +22,7 @@ class LibraryRepository(IRepository):
         return entry
 
     def authenticate_user(self, username, password):
-        user = self._database.users.first_or_default(username=username)
+        user = self._database.users.first_or_default(username=username.lower())
         if not user: return False
         salted_hash, salt = user.password.split(':')
         # re-salt-hash the provided password and check if match

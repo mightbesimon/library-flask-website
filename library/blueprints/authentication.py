@@ -23,7 +23,7 @@ def register():
 
     _repo.add_user(User(form.username.data, form.password.data))
     session.clear()
-    session['username'] = form.username.data
+    session['username'] = form.username.data.lower()
     return redirect('/account')
 
 @blueprint.route('/login', methods=['GET', 'POST'])
@@ -34,7 +34,7 @@ def login():
         return render_template('credentials.html', nav=nav, form=form)
 
     session.clear()
-    session['username'] = form.username.data
+    session['username'] = form.username.data.lower()
     return redirect('/account')
 
 @blueprint.route('/logout')
