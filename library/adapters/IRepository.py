@@ -27,6 +27,10 @@ class IRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
+    def get_current_user(self):
+        raise NotImplementedError
+
+    @abstractmethod
     def get_catalogue(self):
         raise NotImplementedError
 

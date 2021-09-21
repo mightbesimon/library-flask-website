@@ -33,12 +33,16 @@
             {% endif %}
         </article>
         <div class="image-card">
-            <img src="{{ book.image_url }}" alt="{{ book.title }}" width="100%" height="auto">
+            <img src="{{ book.image_url }}" alt="{{ book.title }}">
             {% if book.ebook %}
                 <h5 class="ebook">eBook avaliable!</h5>
             {% endif %}
-            <a href="">
-                <h4 class="button read">Mark as read</h4>
+            <a href="/book/{{ book.book_id }}/read">
+                {% if user and book in user.read_books %} 
+                    <h4 class="read">Already read</h4>
+                {% else %} 
+                    <h4 class="button not-read">Mark as read</h4>
+                {% endif %}
             </a>
             <a href="">
                 <h4 class="button review">Write a review</h4>

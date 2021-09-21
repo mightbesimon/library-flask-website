@@ -4,6 +4,7 @@
 '''
 
 from hashlib import sha256
+from flask   import session
 
 from .IRepository import IRepository
 from .LibraryDataContext import LibraryDataContext
@@ -31,6 +32,10 @@ class LibraryRepository(IRepository):
     def get_user(self, **kwargs):
         '''uses LINQ support in DataSet class'''
         return self._database.users.first_or_default(**kwargs)
+
+    def get_current_user(self):
+        return self.get_user(username=session['username']) \
+            if 'username' in session else None
 
     def get_catalogue(self):
         return self._database.catalogue

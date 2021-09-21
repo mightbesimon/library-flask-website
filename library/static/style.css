@@ -169,7 +169,6 @@ main section.image-table div.card div.title {
 /* .card:hover; */
 main section.image-table div.card:hover {
     /*margin: 0;*/
-    /*flex: 5 1 20%;*/
     box-shadow: var(--shadow-card2);
 }
 
@@ -216,15 +215,15 @@ main section.book-info div.image-card img {
     border-radius: 0.5rem;
 }
 main section.book-info div.image-card h5.ebook {
-    margin: 1rem .5rem 0 .5rem;
+    margin: .5rem .5rem 0 .5rem;
     padding: .2rem;
     border-radius: .2rem;
 
-    font-family: sans-serif;
+    font-family: monospace;
     text-align: center;
     box-shadow: var(--shadow-in);
     background: var(--main);
-    color: var(--green-vibr);
+    color: var(--highlight);
 }
 main section.book-info div.image-card h4.button {
     margin: 1rem 1rem 0 1rem;
@@ -242,8 +241,15 @@ main section.book-info div.image-card h4.button:hover {
     box-shadow: var(--shadow-hover);
     background: var(--button-hover);
 }
-main section.book-info div.image-card:hover {
-    /*box-shadow: var(--shadow-hover);*/
+main section.book-info div.image-card h4.read {
+    margin: 1rem 1rem 0 1rem;
+    padding: .4rem;
+    border: 1px solid var(--shadow);
+    border-radius: 0.5rem;
+
+    text-align: center;
+    background: white;
+    color: var(--text);
 }
 main section.book-info div.image-card:hover h4.button {
     box-shadow: var(--shadow-card);
