@@ -6,13 +6,15 @@
 from flask import Flask
 
 from config import EnvConfig
-from .blueprints import home, catalogue, authentication, account
+from .blueprints import home, catalogue, authentication, account, error
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(EnvConfig)           # configure flask app
     
+    app.register_blueprint(error.blueprint)     # custom 404 error page
+
     app.register_blueprint(home.blueprint)      # register blueprints
     app.register_blueprint(authentication.blueprint)
     app.register_blueprint(account.blueprint)

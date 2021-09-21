@@ -16,6 +16,8 @@ class Tab:
 
     def is_current(self):
         '''true if this tab is the current tab'''
+        if request.view_args is None:
+            return False    # otherwise error.blueprint will throw and error
         return url_for(request.endpoint, **request.view_args)==self.url
 
     def before_current(self):
