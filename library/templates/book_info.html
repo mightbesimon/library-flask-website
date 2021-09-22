@@ -55,7 +55,25 @@
         {% if not reviews %}
             <p class="no-reviews">no reviews yet</p>
         {% else %}
-
+            {% for review in reviews %}
+                <div class="review">
+                    <div class="rating">
+                        {% for _ in range(review.rating) %}
+                            ★
+                        {% endfor %}
+                        {% for _ in range(5-review.rating) %}
+                            ☆
+                        {% endfor %}
+                        <br>
+                        by {{ review.user.username }}
+                        <br>
+                        <span class="date">{{ review.timestamp.strftime('%d %b, %Y') }}</span>
+                    </div>
+                    <div class="review_text">
+                        {{ review.review_text }}
+                    </div>
+                </div>
+            {% endfor %}
         {% endif %}
     </section>
 

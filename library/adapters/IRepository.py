@@ -43,3 +43,13 @@ class IRepository(ABC):
     def get_book(self, **kwargs):
         '''uses LINQ support in DataSet class'''
         raise NotImplementedError
+
+    @abstractmethod
+    def get_reviews(self, *args, **kwargs):
+        '''uses LINQ support in DataSet class'''
+        raise NotImplementedError
+
+    @abstractmethod
+    def add_review(self, review):
+        '''returns a copy of the entry added to the database'''
+        raise NotImplementedError

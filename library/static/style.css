@@ -263,6 +263,30 @@ main section.reviews p.no-reviews {
     margin: 2.5rem;
     text-align: center;
 }
+main section.reviews div.review {
+    margin: 1rem;
+    border-radius: .5rem;
+    border: 1px solid var(--shadow);
+    /*box-shadow: var(--shadow-card);*/
+    background: var(--card);
+    display: flex;
+    align-items: stretch;
+}
+main section.reviews div.review div.rating {
+    padding: 1rem;
+    min-width: 6.3rem;
+    /*max-width: 6.3rem;*/
+    border-radius: .5rem 0 0 .5rem;
+    border-right: 1px solid var(--shadow);
+    background: var(--cream-dark);
+}
+main section.reviews div.review div.rating span.date {
+    font: .75rem sans-serif;
+    color: var(--shadow);
+}
+main section.reviews div.review div.review_text {
+    padding: 1rem;
+}
 /* * * * * * * * * * * * * * * * * * * * * */
 /* * *          write review           * * */
 /* * * * * * * * * * * * * * * * * * * * * */
