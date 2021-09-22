@@ -2,6 +2,7 @@
     All rights reserved.
 '''
 
+from functools import wraps
 from flask import session, redirect
 
 
@@ -23,18 +24,17 @@ usage examples:
 class authorisation:
     '''authorisation decorator with args
 usage examples:
-    @authorisation(userOnly)                # only users may access the content
+    @authorisation(policy=userOnly)         # only users may access the content
     @authorisation(useronly, aged21over)    # only users aged 21 and over may access
     '''
-    def __init__(self, *policies):
-        self.policies = policies
+    def __init__(self, policy=None, *policies):
+        self.policies = (policy, *policies) if policy else policies
 
     def __call__(self, function):
-        self.function = function
-        return self.authorise
-    
-    def authorise(self, *args, **kwargs):
-        if all(policy.verify() for policy in self.policies):
-            return self.function(*args, **kwargs)
-        else:
-            return redirect('/login')
+        @wraps(function)
+        def authorise(*args, **kwargs):
+            if all(policy.verify() for policy in self.policies):
+                return function(*args, **kwargs)
+            else:
+                return redirect('/login')
+        return authorise
