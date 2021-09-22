@@ -3,7 +3,7 @@
     Simon Shan  441147157
 '''
 
-from .LibraryRepository import LibraryRepository
+from .libraryrepository import LibraryRepository
 
 # instantiate a repository
 _repo = LibraryRepository()

@@ -5,9 +5,9 @@
 
 import pytest
 
-from library.adapters.DataSet import DataSet
-from library.adapters.LibraryDataContext import LibraryDataContext
-from library.adapters.LibraryRepository  import LibraryRepository
+from library.adapters.dataset import DataSet
+from library.adapters.librarydatacontext import LibraryDataContext
+from library.adapters.libraryrepository  import LibraryRepository
 
 class Container:
     '''for linq testing'''

@@ -6,8 +6,8 @@
 from hashlib import sha256
 from flask   import session
 
-from .IRepository import IRepository
-from .LibraryDataContext import LibraryDataContext
+from .irepository import IRepository
+from .librarydatacontext import LibraryDataContext
 
 class LibraryRepository(IRepository):
 

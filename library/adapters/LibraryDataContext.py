@@ -4,7 +4,7 @@
 '''
 
 from .jsondatareader import BooksJSONReader, UsersJSONReader
-from .DataSet import DataSet
+from .dataset import DataSet
 
 # path constants
 DATA_DIRECTORY   = 'library/data/'

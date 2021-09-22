@@ -19,8 +19,8 @@ nav = Navigation()
 
 
 #======[!] * * *   help with imports   * * * [!]======#
-from .registration  import RegistrationForm
-from .login         import LoginForm
-from .authorisation import authorisation
-from .review        import ReviewForm
+from .form_registration import RegistrationForm
+from .form_login        import LoginForm
+from .authorisation     import authorisation
+from .form_review       import ReviewForm
 #======[!] * * *   help with imports   * * * [!]======#
