@@ -11,8 +11,9 @@ from . import Book
 
 class Review(BaseModel):
 
-    def __init__(self, book: Book, review_text: str, rating: int):
+    def __init__(self, book: Book, user: 'User', review_text: str, rating: int):
         self.__book = book if isinstance(book, Book) else None
+        self.__user = user
         self.__review_text = review_text.strip() \
                     if isinstance(review_text, str) else 'N/A'
         if not 1<=rating<=5: raise ValueError
@@ -26,6 +27,10 @@ class Review(BaseModel):
     @property
     def book(self) -> Book:
         return self.__book
+
+    @property
+    def user(self) -> 'User':
+        return self.__user
 
     @property
     def review_text(self) -> str:
