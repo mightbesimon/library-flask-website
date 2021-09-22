@@ -3,13 +3,14 @@
     Simon Shan  441147157
 '''
 
-from .jsondatareader import BooksJSONReader
+from .jsondatareader import BooksJSONReader, UsersJSONReader
 from .DataSet import DataSet
 
 # path constants
 DATA_DIRECTORY   = 'library/data/'
-FILENAME_BOOKS   = DATA_DIRECTORY+ 'comic_books_excerpt.json'
+FILENAME_BOOKS   = DATA_DIRECTORY+'comic_books_excerpt.json'
 FILENAME_AUTHORS = DATA_DIRECTORY+'book_authors_excerpt.json'
+FILENAME_USERS   = DATA_DIRECTORY+'dummy_users_and_reviews.json'
 
 
 class LibraryDataContext:
@@ -40,7 +41,10 @@ class LibraryDataContext:
         # read in the books
         reader = BooksJSONReader(FILENAME_BOOKS, FILENAME_AUTHORS)
         reader.read_json_files()
-
         self._catalogue = DataSet(reader.dataset_of_books)
-        self._users     = DataSet()
-        self._reviews   = DataSet()
+
+        # read in users and reviews
+        reader = UsersJSONReader(FILENAME_USERS)
+        reader.read_json_file(self.catalogue)
+        self._users   = DataSet(reader.dataset_of_users)
+        self._reviews = DataSet(reader.dataset_of_reviews)

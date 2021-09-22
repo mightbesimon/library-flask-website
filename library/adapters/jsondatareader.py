@@ -6,7 +6,7 @@
 import json
 from typing import List
 
-from ..models import Publisher, Author, Book
+from ..models import Publisher, Author, Book, User, Review
 
 
 language_codes = {
@@ -37,7 +37,7 @@ class BooksJSONReader:
         books_similar = {}      # similar_books of books mapping
 
         # build the authors dictionary
-        with open(self.__filename_authors, 'r') as file:
+        with open(self.__filename_authors, 'r', encoding="UTF-8") as file:
             for line in file.read().split('\n'):
                 if not line: continue
                 author_data = json.loads(line)
@@ -48,7 +48,7 @@ class BooksJSONReader:
         # build the books dictionary
         # build the books_authors dictionary
         # build the books_similar dictionary
-        with open(self.__filename_books, 'r') as file:
+        with open(self.__filename_books, 'r', encoding="UTF-8") as file:
             for line in file.read().split('\n'):
                 if not line: continue
                 book_data = json.loads(line)
@@ -90,3 +90,37 @@ class BooksJSONReader:
                                                     if int(_id) in books]
 
         self.__dataset_of_books = list(books.values())
+
+class UsersJSONReader:
+
+    @property
+    def dataset_of_users(self) -> List[User]:
+        return self.__dataset_of_users
+
+    @property
+    def dataset_of_reviews(self) -> List[Review]:
+        return self.__dataset_of_reviews
+
+    def __init__(self, filename_users):
+        self.__filename_users = filename_users
+        self.__dataset_of_users   = []
+        self.__dataset_of_reviews = []
+
+    def read_json_file(self, books):
+        with open(self.__filename_users, 'r', encoding="UTF-8") as file:
+            for line in file.read().split('\n'):
+                if not line: continue
+                user_data = json.loads(line)
+                user = User(user_data['username'], user_data['password'])   # username
+                                                                            # password
+                for book_id in user_data['read_books']:                     # user read books
+                    book = books.first_or_default(book_id=book_id)
+                    user.read_a_book(book)
+
+                for review_data in user_data['reviews']:                    # user reviews
+                    book = books.first_or_default(book_id=review_data['book'])
+                    review = Review(book, user, review_data['text'], review_data['rating'])
+                    user.add_review(review)
+                    self.__dataset_of_reviews.append(review)
+
+                self.__dataset_of_users.append(user)

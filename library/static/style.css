@@ -273,9 +273,9 @@ main section.reviews div.review {
     align-items: stretch;
 }
 main section.reviews div.review div.rating {
-    padding: 1rem;
-    min-width: 6.3rem;
-    /*max-width: 6.3rem;*/
+    padding: 1rem 0 1rem 1rem;
+    min-width: 7.3rem;
+    /*max-width: 7.3rem;*/
     border-radius: .5rem 0 0 .5rem;
     border-right: 1px solid var(--shadow);
     background: var(--cream-dark);
