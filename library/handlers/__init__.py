@@ -22,4 +22,5 @@ nav = Navigation()
 from .registration  import RegistrationForm
 from .login         import LoginForm
 from .authorisation import authorisation
+from .review        import ReviewForm
 #======[!] * * *   help with imports   * * * [!]======#

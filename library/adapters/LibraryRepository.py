@@ -47,3 +47,7 @@ class LibraryRepository(IRepository):
     def get_book(self, **kwargs):
         '''uses LINQ support in DataSet class'''
         return self._database.books.first_or_default(**kwargs)
+
+    def add_review(self, review):
+        entry = self._database.reviews.add(review)
+        return entry

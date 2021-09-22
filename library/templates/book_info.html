@@ -44,7 +44,7 @@
                     <h4 class="button not-read">Mark as read</h4>
                 {% endif %}
             </a>
-            <a href="">
+            <a href="/book/{{ book.book_id }}/review#write">
                 <h4 class="button review">Write a review</h4>
             </a>
         </div>
@@ -58,4 +58,46 @@
 
         {% endif %}
     </section>
+
+    {% if form %}
+    <section class="write-review" id="write">
+        <h2>Write a Review</h2>
+        <form class="review" method="POST">
+            {% if form.rating.errors %}
+                <div class="error-box">
+                    {% for error in form.rating.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {{ form.csrf_token }}
+            <table>
+                <colgroup>
+                    <col style="width:20%">
+                    <col style="width:80%">
+                </colgroup>
+                <tr>
+                    <td class="rating">
+                        {{ form.rating.label }}<span class="required">*</span>
+                    </td>
+                    <td class="rating">
+                        garbage
+                        {% for subfield in form.rating %}
+                            {{ subfield }}
+                        {% endfor %}
+                        incredible
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ form.review_text.label }}</td>
+                    <td>{{ form.review_text }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>{{ form.submit }}</td>
+                </tr>
+            </table>
+        </form>
+    </section>
+    {% endif %}
 {% endblock %}
