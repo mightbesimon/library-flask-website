@@ -76,8 +76,9 @@ nav h2 {
     margin: 0;
     padding: 10%;
     padding-right: 0 !important;
-    height: 1.8rem;
+    /*height: 1.8rem;*/
 
+    /*font-size: 1.2rem;*/
     background: var(--nav-bg);
     color: var(--nav-text);
     transition: margin .5s, padding .5s, border-radius .5s, background .5s, color .3s;
@@ -155,7 +156,7 @@ main h1 {
 }
 
 /* * * * * * * * * * * * * * * * * * * * * */
-/* * *           catalogue             * * */
+/* * *            catalogue            * * */
 /* * * * * * * * * * * * * * * * * * * * * */
 main section.image-table {
     display: flex;
@@ -569,6 +570,77 @@ main section.kia-ora form.credentials div.question {
 main section.kia-ora form.credentials div.question a {
     font-style: italic;
     color: var(--highlight);
+}
+
+/* * * * * * * * * * * * * * * * * * * * * */
+/* * *             account             * * */
+/* * * * * * * * * * * * * * * * * * * * * */
+main h2 {
+    margin: 0;
+    padding-left: 1.5rem;
+    border-bottom: 1px var(--shadow) solid;
+}
+main p.not-following {
+    margin: 2.5rem;
+    text-align: center;
+}
+main section.social {
+    display: flex;
+    overflow-y: scroll;
+}
+main section.social#discover-full {
+    display: flex;
+    flex-wrap: wrap;
+}
+main section.social div.card {
+    flex: 1;
+    margin: 1rem;
+    min-width: 18%;
+    border-radius: .75rem;
+
+    box-shadow: var(--shadow-card);
+    background: var(--card);
+    transition: box-shadow .3s ease;
+}
+main section.social#discover-full div.card {
+    max-width: 33%;
+}
+main section.social div.card:hover {
+    box-shadow: var(--shadow-card2);
+}
+main section.social div.card h3 {
+    margin: 0;
+    padding: 1rem;
+    border-radius: .5rem .5rem 0 0;
+    text-align: center;
+    background: var(--footer);
+}
+main section.social div.card p {
+    margin: 0;
+    padding: 1rem;
+}
+main section.social div.card span.label {
+    font: .65rem monospace;
+}
+main section.social div.card h5.button {
+    margin: 0 1rem 1rem 1rem;
+    padding: .5rem;
+    border-radius: .5rem;
+
+    text-align: center;
+    font-family: sans-serif;
+    background: var(--button);
+    color: var(--nav-text);
+    transition: padding .3s, box-shadow .3s, background .3s;
+}
+main section.social div.card h5.button#unfollow {
+    background: var(--red);
+}
+main section.social div.card h5.button:hover {
+    padding-top: .6rem;
+    padding-bottom: .4rem;
+    box-shadow: var(--shadow-hover);
+    background: var(--button-hover);
 }
 
 /**************************************************************

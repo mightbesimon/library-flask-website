@@ -27,6 +27,11 @@ class IRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
+    def get_users(self, *args, **kwargs):
+        '''uses LINQ support in DataSet class'''
+        raise NotImplementedError
+
+    @abstractmethod
     def get_current_user(self):
         raise NotImplementedError
 
@@ -37,6 +42,11 @@ class IRepository(ABC):
 
     @abstractmethod
     def get_book(self, **kwargs):
+        '''uses LINQ support in DataSet class'''
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_books(self, *args, **kwargs):
         '''uses LINQ support in DataSet class'''
         raise NotImplementedError
 
@@ -63,8 +73,4 @@ class IRepository(ABC):
     @abstractmethod
     def get_publishers_names(self):
         '''get all publishers' names, no duplicates'''
-        raise NotImplementedError
-
-    @abstractmethod
-    def get_books(self, *args, **kwargs):
         raise NotImplementedError

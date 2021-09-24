@@ -47,8 +47,8 @@ usage examples:
     def all(self, function=None, **kwargs):
         return len(self)==len(self.where(function=function, **kwargs))
 
-    def order_by(self, key=None):
-        return type(self)(sorted(self, key=key))
+    def order_by(self, key=None, reverse=False):
+        return type(self)(sorted(self, key=key, reverse=reverse))
 
     def then_by(self, key=None):
         ...

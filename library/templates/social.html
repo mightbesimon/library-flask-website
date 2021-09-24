@@ -3,49 +3,6 @@
 
 {% block main %}
     <h1>Kia ora {{ user.username }}!</h1>
-    <section class="me">
-        <dl>
-            <dt>password</dt>
-            <dd>{{ user.password }}</dd>
-            <dt>books read</dt>
-            <dd>{{ user.books_read }}</dd>
-            <dt>pages read</dt>
-            <dd>{{ user.pages_read }}</dd>
-            <dt>followers</dt>
-            <dd>{{ user.followers }}</dd>
-        </dl>
-    </section>
-
-    <section class="reviews">
-        <h2>Reviews</h2>
-        {% if not user.reviews %}
-            <p class="no-reviews">no reviews yet</p>
-        {% else %}
-            {% for review in user.reviews %}
-                <a href="/book/{{ review.book.book_id }}">
-                    <div class="review">
-                        <div class="rating">
-                            {{ review.book.title }}
-                            <br>
-                            {% for _ in range(review.rating) %}
-                                ★
-                            {% endfor %}
-                            {% for _ in range(5-review.rating) %}
-                                ☆
-                            {% endfor %}
-                            <br>
-                            by {{ review.user.username }}
-                            <br>
-                            <span class="date">{{ review.timestamp.strftime('%d %b, %Y') }}</span>
-                        </div>
-                        <div class="review_text">
-                            {{ review.review_text }}
-                        </div>
-                    </div>
-                </a>
-            {% endfor %}
-        {% endif %}
-    </section>
 
     <h2>Following</h2>
     {% if user.following %}
@@ -66,7 +23,7 @@
                     <span class="label">Followers:&nbsp;</span>
                     {{ other.num_followers() }}
                 </p>
-                <a href="/account/follow?username={{ other.username }}">
+                <a href="/social/follow?username={{ other.username }}">
                     <h5 class="button" id="unfollow">- unfollow</h5>
                 </a>
             </div>
@@ -82,7 +39,7 @@
 
     <h2>Discover</h2>
     {% if discover %}
-        <section class="social" id="discover">
+        <section class="social" id="discover-full">
         {% for other in discover %}
             <div class="card">
                 <h3>{{ other.username }}</h3>
@@ -99,7 +56,7 @@
                     <span class="label">Followers:&nbsp;</span>
                     {{ other.num_followers() }}
                 </p>
-                <a href="/account/follow?username={{ other.username }}">
+                <a href="/social/follow?username={{ other.username }}">
                     <h5 class="button">+ follow</h5>
                 </a>
             </div>
@@ -112,4 +69,5 @@
             There is no one else left.
         </p>
     {% endif %}
+
 {% endblock %}

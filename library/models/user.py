@@ -20,9 +20,11 @@ class User(BaseModel):
         self.__password = self.salt_hash(password) \
             if isinstance(password,  str) and len(password)>=7  \
             else None
-        self.__read_books = []
+        self.__books_read = []
         self.__reviews    = []
         self.__pages_read = 0
+        self.__followers  = []
+        self.__following  = []
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -31,12 +33,32 @@ class User(BaseModel):
 
     def read_a_book(self, book: Book):
         if not isinstance(book, Book): return
-        self.__read_books.append(book)
+        self.__books_read.append(book)
         self.__pages_read += book.num_pages if book.num_pages else 0
 
     def add_review(self, review: Review):
         if isinstance(review, Review):
             self.__reviews.append(review)
+
+
+    def follow(self, user: 'User'):
+        self.following.append(user)
+        user.followers.append(self)
+
+    def unfollow(self, user: 'User'):
+        while user in self.following:
+            self.following.remove(user)
+        while self in user.followers:
+            user.followers.remove(self)
+
+    def num_books_read(self):
+        return len(self.books_read)
+
+    def num_reviews(self):
+        return len(self.reviews)
+
+    def num_followers(self):
+        return len(self.followers)
 
     ##################   static methods   ##################
     @staticmethod
@@ -56,8 +78,8 @@ class User(BaseModel):
         return self.__password
 
     @property
-    def read_books(self) -> List[Book]:
-        return self.__read_books
+    def books_read(self) -> List[Book]:
+        return self.__books_read
 
     @property
     def reviews(self) -> List[Review]:
@@ -66,3 +88,11 @@ class User(BaseModel):
     @property
     def pages_read(self) -> int:
         return self.__pages_read
+
+    @property
+    def followers(self) -> int:
+        return self.__followers
+
+    @property
+    def following(self) -> int:
+        return self.__following

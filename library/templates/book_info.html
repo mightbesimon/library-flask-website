@@ -38,7 +38,7 @@
                 <h5 class="ebook">eBook avaliable!</h5>
             {% endif %}
             <a href="/book/{{ book.book_id }}/read">
-                {% if user and book in user.read_books %} 
+                {% if user and book in user.books_read %} 
                     <h4 class="read">Already read</h4>
                 {% else %} 
                     <h4 class="button not-read">Mark as read</h4>

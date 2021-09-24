@@ -37,16 +37,18 @@ class Navigation:
         Tab('Home'         , '/'           ),
         Tab('Register'     , '/register'   ),
         Tab('Log in'       , '/login'      ),
-        Tab('Suggestions'  , '/suggestions'),
+        # Tab('Suggestions'  , '/suggestions'),
         Tab('Our Catalogue', '/catalogue'  ),
         Tab('About Us'     , '/aboutus'    ),
+        Tab('Custom 404'   , '/doesntexist'),
     ]
 
     authenticated = [
         Tab('Home'         , '/'           ),
         Tab('Account'      , '/account'    ),
         Tab('Log out'      , '/logout'     ),
-        Tab('Suggestions'  , '/suggestions'),
+        Tab('Social'       , '/social'     ),
+        # Tab('Suggestions'  , '/suggestions'),
         Tab('Our Catalogue', '/catalogue'  ),
         Tab('About Us'     , '/aboutus'    ),
     ]

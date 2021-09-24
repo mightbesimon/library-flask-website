@@ -29,20 +29,20 @@ It also contains a simple Flask application that renders content of a Book objec
 - Testing
   - [x] Unit tests (models).
   - [x] Unit tests (adapters).
-  - [ ] Unit tests (handlers).
-  - [ ] Intergration tests.
+  - [x] Unit tests (handlers).
+  - [x] Intergration tests.
 - Search feature
   - [x] Search books by title at `/catalogue`, which redirects you to ...
-  - [ ] Advanced search page`/catalogue/search` where you can search by author, release year and publisher.
+  - [x] Advanced search page`/catalogue/search` where you can search by author, release year and publisher.
   - if you do not wish to search by title, click on the search button without a title on the catalogue page, it will redirect you to the advanced search page.
-  - [ ] Http query parameters
+  - [x] Http query parameters
 - Cool new features
   - [x] New image_url and language attributes to `Book` model.
   - [x] LINQ support.
-  - [x] Authorisation policies.
+  - [x] Policy-based authorisation.
   - [x] Salt hashes passwords for security.
-  - [ ] Personalised suggestions.
-  - [ ] Social page, follow other users.
+  - [x] Personalised suggestions.
+  - [x] Social page, follow other users.
 
 ## Structure ##
 
@@ -96,16 +96,20 @@ compsci235-assignment2-covid-19/
 │   │   └──📄 navigation.py
 │   │
 │   ├──📁 static/
-│   │   ├──📄 home.css
+│   │   ├──🏞 about.png
+│   │   ├──🏞 login.png
+│   │   ├──🏞 register.png
+│   │   ├──🏞 favicon.ico
 │   │   ├──🏞 notfound.gif
+│   │   ├──📄 home.css
 │   │   └──📄 style.css
 │   ├──📁 templates/
-│   │   ├──📄 ...
 │   │   ├──📄 aboutus.html
 │   │   ├──📄 home.html
 │   │   │
 │   │   ├──📄 credentials.html
 │   │   ├──📄 account.html
+│   │   ├──📄 social.html
 │   │   │
 │   │   ├──📄 catalogue.html
 │   │   ├──📄 book_info.html
@@ -118,7 +122,7 @@ compsci235-assignment2-covid-19/
 │
 ├──📁 tests/
 │   ├──📁 intergration/
-│   │   └──🧪 ...
+│   │   └──🧪 test_end2end.py
 │   └──📁 unit/
 │       ├──🧪 test_adapters.py
 │       ├──🧪 test_handlers.py

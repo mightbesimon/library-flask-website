@@ -34,6 +34,10 @@ class LibraryRepository(IRepository):
         '''uses LINQ support in DataSet class'''
         return self._database.users.first_or_default(**kwargs)
 
+    def get_users(self, *args, **kwargs):
+        '''uses LINQ support in DataSet class'''
+        return self._database.users.where(*args, **kwargs)
+
     def get_current_user(self):
         return self.get_user(username=session['username']) \
             if 'username' in session else None
@@ -45,6 +49,10 @@ class LibraryRepository(IRepository):
     def get_book(self, **kwargs):
         '''uses LINQ support in DataSet class'''
         return self._database.books.first_or_default(**kwargs)
+
+    def get_books(self, *args, **kwargs):
+        '''uses LINQ support in DataSet class'''
+        return self._database.books.where(*args, **kwargs)
 
     def get_reviews(self, *args, **kwargs):
         '''uses LINQ support in DataSet class'''
@@ -72,6 +80,3 @@ class LibraryRepository(IRepository):
         return self._database.books.select(lambda book: book.publisher) \
                                    .select(lambda publisher: publisher.name) \
                                    .remove_dupes()
-
-    def get_books(self, *args, **kwargs):
-        return self._database.books.where(*args, **kwargs)

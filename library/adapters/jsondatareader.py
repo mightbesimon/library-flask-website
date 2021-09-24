@@ -113,7 +113,7 @@ class UsersJSONReader:
                 user_data = json.loads(line)
                 user = User(user_data['username'], user_data['password'])   # username
                                                                             # password
-                for book_id in user_data['read_books']:                     # user read books
+                for book_id in user_data['books_read']:                     # user read books
                     book = books.first_or_default(book_id=book_id)
                     user.read_a_book(book)
 
