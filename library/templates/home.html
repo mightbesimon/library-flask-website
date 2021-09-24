@@ -1,18 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Library</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/static/home.css"/>
+    <link rel="icon" href="/static/favicon.ico"/>
 </head>
 <body>
     <main>
-        <h1>Home</h1>
-        <a href="/catalogue">Our catalogue</a>
-        <a href="/register">Register</a>
-        <a href="/login">Log in</a>
-        <a href="/suggestions">Your Suggestions</a>
-        <a href="/aboutus">About Us</a>
+        <h1>
+            Kia Ora, Welcome to ✨<i>Library</i><span class="trademark">™</span>✨
+        </h1>
+        <section class="account">
+            <div class="card">
+                <a href="/aboutus">
+                    <img src="/static/about.png" alt="about us">
+                    <h3>About Us</h3>
+                </a>
+            </div>
+            <div class="card">
+                {% if 'username' in session %}
+                <a href="/account">
+                    <img src="/static/login.png" alt="log in">
+                    <h3>Account</h3>
+                </a>
+                {% else %}
+                <a href="/login">
+                    <img src="/static/login.png" alt="log in">
+                    <h3>Log in</h3>
+                </a>
+                {% endif%}
+            </div>
+            <div class="card">
+                {% if 'username' in session %}
+                <a href="/logout">
+                    <img src="/static/register.png" alt="register">
+                    <h3>Log out</h3>
+                </a>
+                {% else %}
+                <a href="/register">
+                    <img src="/static/register.png" alt="register">
+                    <h3>Register</h3>
+                </a>
+                {% endif%}
+            </div>
+        </section>
+        <section class="catalogue">
+            <a href="/catalogue">
+                <h2>Our Catalogue</h2>
+                <div class="image-table">
+                    {% for book in catalogue %}
+                    <div class="card">
+                        <a href="/book/{{ book.book_id }}">
+                            <img src="{{ book.image_url }}" alt="{{ book.title }}">
+                            <div class="title">{{ book.short_title() }}</div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </a>
+        </section>
+        <section class="suggestions">
+            <a {% if suggestions%} href="/suggestions" 
+                        {% else %} href="/login" {% endif %}>
+            <h2>Your Suggestions</h2>
+            {% if suggestions%}
+            <div class="image-table">
+                {% for book in suggestions %}
+                <div class="card">
+                    <a href="/book/{{ book.book_id }}">
+                        <img src="{{ book.image_url }}" alt="{{ book.title }}">
+                        <div class="title">{{ book.short_title() }}</div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <span class="not-logged-in">
+                <i>Log in</i> to view suggestions
+            </span>
+            {% endif %}
+            </a>
+        </section>
         <footer>Copyright 2021 mightbesimon | github.com/mightbesimon</footer>
     </main>
 </body>

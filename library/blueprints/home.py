@@ -14,7 +14,9 @@ blueprint = Blueprint('home', __name__)
 
 @blueprint.route('/')
 def home():
-    return render_template('home.html')
+    catalogue = _repo.get_catalogue()
+    suggestions = catalogue if 'username' in session else False
+    return render_template('home.html', catalogue=catalogue, suggestions=suggestions)
 
 @blueprint.route('/aboutus')
 def aboutus():

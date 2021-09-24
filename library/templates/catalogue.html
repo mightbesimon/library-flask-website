@@ -41,7 +41,7 @@
         {% for book in catalogue %}
             <div class="card">
                 <a href="/book/{{ book.book_id }}">
-                    <img src="{{ book.image_url }}" alt="{{ book.title }}" width="100%" height="auto">
+                    <img src="{{ book.image_url }}" alt="{{ book.title }}">
                     <div class="title">{{ book.short_title() }}</div>
                 </a>
             </div>

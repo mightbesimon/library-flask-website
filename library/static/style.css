@@ -165,8 +165,7 @@ main section.image-table {
 main section.image-table div.card {
     flex: 1 1 calc(25% - 2rem);
     margin: 1rem;
-    /*max-width: calc(33.3% - 2rem);*/
-    max-width: 28.3%;
+    max-width: 30%;
     border-radius: 1rem;
 
     box-shadow: var(--shadow-card);
@@ -175,6 +174,7 @@ main section.image-table div.card {
 }
 main section.image-table div.card img {
     display: block;
+    width: 100%;
     height: auto;
     border-radius: 1rem 1rem 0 0;
 }
@@ -185,7 +185,6 @@ main section.image-table div.card div.title {
 }
 /* .card:hover; */
 main section.image-table div.card:hover {
-    /*margin: 0;*/
     box-shadow: var(--shadow-card2);
 }
 

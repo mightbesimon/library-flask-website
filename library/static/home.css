@@ -68,16 +68,101 @@ main {
     padding-right: 7.5%;
     min-height: 100vh;
 
-    background: var(--main);
-    color: var(--text);
+    background: var(--nav-bg);
+    color: var(--main);
 
     display: flex;
     flex-direction: column;
 }
 main h1 {
     font-size: 2.4rem;
-    color: var(--heading);
+    color: var(--main);
     text-shadow: 0 0 .2rem var(--shadow);
+}
+main h1 span.trademark {
+    font: 2.4rem sans-serif;
+}
+
+main section.account div.card,
+main section.catalogue,
+main section.suggestions {
+    margin: 1rem;
+    padding: .8rem;
+    border-radius: .75rem;
+    box-shadow: var(--shadow-card);
+    background: var(--main);
+    color: var(--text);
+}
+main section.catalogue h2,
+main section.suggestions h2 {
+    margin: 0;
+    color: black;
+}
+
+
+main section.account {
+    display: flex;
+    justify-content: space-around;
+}
+main section.account div.card {
+    padding: 0;
+    width: 20%;
+}
+main section.account div.card:hover {
+    box-shadow: var(--shadow-card2);
+}
+main section.account div.card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: .75rem .75rem 0 0;
+    background: var(--footer);
+}
+main section.account div.card h3 {
+    margin: 0;
+    padding: .8rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+
+main div.image-table {
+    display: flex;
+    overflow-y: scroll;
+}
+main div.image-table div.card {
+    margin: 1rem;
+    min-width: 15%;
+    border-radius: .75rem;
+
+    box-shadow: var(--shadow-card);
+    background: var(--card);
+    transition: box-shadow .3s ease;
+}
+main div.image-table div.card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: .75rem .75rem 0 0;
+}
+main div.image-table div.card div.title {
+    padding: .5rem;
+    border-radius: 0 0 1rem 1rem;
+    font: .65rem sans-serif;
+}
+main div.image-table div.card:hover {
+    box-shadow: var(--shadow-card2);
+}
+main section.suggestions span.not-logged-in {
+    display: block;
+    padding: 1rem;
+    text-align: center;
+    font: .9rem monospace;
+}
+main section.suggestions span.not-logged-in i {
+    font-style: italic;
+    text-decoration: underline;
+    color: var(--highlight);
 }
 
 /**************************************************************
@@ -94,5 +179,5 @@ main footer {
     text-align: right;
 
     box-shadow: var(--shadow-in);
-    background: var(--footer);
+    background: var(--nav-hover);
 }
