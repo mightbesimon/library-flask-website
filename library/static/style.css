@@ -643,6 +643,26 @@ main section.social div.card h5.button:hover {
     background: var(--button-hover);
 }
 
+/* * * * * * * * * * * * * * * * * * * * * */
+/* * *            about us             * * */
+/* * * * * * * * * * * * * * * * * * * * * */
+main section.about-us a {
+    color: var(--highlight);
+}
+div.quote {
+    margin-top: -1rem;
+    padding: .5rem 0 .5rem 1rem;
+    border-left: 3px solid hsl(40, 8%, 64%);
+    font-family: sans-serif;
+    color: hsl(40, 8%, 64%);
+}
+span.code {
+    border-radius: .2rem;
+    border: 1px solid rgba(0, 0, 0, .2);
+    font: .75rem monospace;
+    background: var(--footer);
+}
+
 /**************************************************************
  *****         footer, copyright information etc.         *****
  **************************************************************/
