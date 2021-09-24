@@ -35,9 +35,7 @@ usage examples:
 
 
     def first_or_default(self, default=None, **kwargs):
-        items = self.where(**kwargs)
-        return items[0] if len(items) else default
-
+        return next(iter(self.where(**kwargs)), default)
 
     def select(self, function=None):
         '''returns a DataSet to allow chaining queries'''
@@ -49,8 +47,26 @@ usage examples:
     def all(self, function=None, **kwargs):
         return len(self)==len(self.where(function=function, **kwargs))
 
-    def order_by(self, function):
+    def order_by(self, key=None):
+        return type(self)(sorted(self, key=key))
+
+    def then_by(self, key=None):
         ...
 
-    def then_by(self, function):
-        ...
+    def flatten(self):
+        '''flatten from 2D list to 1D list'''
+        return type(self)(item for one_list in self for item in one_list)
+
+    def remove_dupes(self):
+        '''preserves order'''
+        # `type(self)(set(self))` doesn't preserve order
+        return type(self)(dict.fromkeys(self))
+
+    def sort(self, *args, **kwargs):
+        super().sort(*args, **kwargs)
+        return self
+
+    def remove(self, item):
+        if item in self:
+            super().remove(item)
+        return self

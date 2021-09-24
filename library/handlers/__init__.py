@@ -23,4 +23,5 @@ from .form_registration import RegistrationForm
 from .form_login        import LoginForm
 from .authorisation     import authorisation
 from .form_review       import ReviewForm
+from .form_search       import SearchTitleForm, SearchForm
 #======[!] * * *   help with imports   * * * [!]======#

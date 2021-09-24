@@ -13,7 +13,10 @@ blueprint = Blueprint('account', __name__)
 
 
 @blueprint.route('/account')
-@authorisation(useronly)
+@authorisation(policy=useronly)
 def account():
     user = _repo.get_user(username=session['username'])
     return render_template('account.html', nav=nav, user=user)
+
+# TODO: your suggestions
+# TODO: social

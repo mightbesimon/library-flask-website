@@ -81,7 +81,7 @@
     <section class="write-review" id="write">
         <h2>Write a Review</h2>
         <form class="review" method="POST">
-            {% if form.rating.errors %}
+            {% if form.errors %}
                 <div class="error-box">
                     {% for error in form.rating.errors %}
                         {{ error }}

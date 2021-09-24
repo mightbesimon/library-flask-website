@@ -2,16 +2,52 @@
 
 
 {% block main %}
-    <h1>Catalogue</h1>
+
+    {% if 'author' not in form %}
+    <div class="title-search-box">
+        <h1>Catalogue</h1>
+        <form class="search-box" method="POST">
+            {{ form.csrf_token }}
+            {{ form.title }}
+            {{ form.submit }}
+        </form>
+    </div>
+    {% else %}
+        <h1>Search Our Catalogue</h1>
+        <form class="search-panel" method="POST">
+            {{ form.csrf_token }}
+            <div class="field">
+                {{ form.title.label }}
+                {{ form.title }}
+            </div>
+            <div class="field">
+                {{ form.author.label }}
+                {{ form.author }}
+            </div>
+            <div class="field">
+                {{ form.year.label }}
+                {{ form.year }}
+            </div>
+            <div class="field">
+                {{ form.publisher.label }}
+                {{ form.publisher }}
+            </div>
+            {{ form.submit }}
+        </form>
+    {% endif %}
+
+    {% if catalogue %}
     <section class="image-table">
         {% for book in catalogue %}
             <div class="card">
                 <a href="/book/{{ book.book_id }}">
-                    <!-- <img src="{{ book.image_url }}" alt="{{ book.title }}" width="19.5%" height="auto" align="center"> -->
                     <img src="{{ book.image_url }}" alt="{{ book.title }}" width="100%" height="auto">
                     <div class="title">{{ book.short_title() }}</div>
                 </a>
             </div>
         {% endfor %}
     </section>
+    {% else %}
+        <p class="no-results">No matching results found 😲</p>
+    {% endif %}
 {% endblock %}

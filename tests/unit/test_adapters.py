@@ -123,8 +123,8 @@ class TestLibraryRepository:
         assert isinstance(catalogue, DataSet)
         assert repr(catalogue.first_or_default())=='<Book The Switchblade Mamma, book id = 25742454>'
 
-    def test_get_all_books(self, repo):
-        assert repo.get_all_books() is repo.get_catalogue()
+    def test_get_books(self, repo):
+        assert repo.get_books() == repo.get_catalogue()
 
     def test_get_book(self, repo):
         assert repr(repo.get_book())=='<Book The Switchblade Mamma, book id = 25742454>'

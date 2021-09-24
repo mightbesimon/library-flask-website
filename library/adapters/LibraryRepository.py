@@ -6,6 +6,7 @@
 from hashlib import sha256
 from flask   import session
 
+from .dataset import DataSet
 from .irepository import IRepository
 from .librarydatacontext import LibraryDataContext
 
@@ -38,11 +39,8 @@ class LibraryRepository(IRepository):
             if 'username' in session else None
 
     def get_catalogue(self):
+        '''get all books in the catalogue'''
         return self._database.catalogue
-
-    def get_all_books(self):
-        '''an alias to get_catalogue'''
-        return self._database.books
 
     def get_book(self, **kwargs):
         '''uses LINQ support in DataSet class'''
@@ -56,3 +54,24 @@ class LibraryRepository(IRepository):
         '''returns a copy of the entry added to the database'''
         entry = self._database.reviews.add(review)
         return entry
+
+    def get_authors_names(self):
+        '''get all authors' names, no duplicates'''
+        return self._database.books.select(lambda book: book.authors) \
+                                   .flatten() \
+                                   .select(lambda author: author.full_name) \
+                                   .remove_dupes()
+
+    def get_release_years(self):
+        '''get all release years, no duplicates'''
+        return self._database.books.select(lambda book: book.release_year) \
+                                   .remove_dupes()
+
+    def get_publishers_names(self):
+        '''get all publishers' names, no duplicates'''
+        return self._database.books.select(lambda book: book.publisher) \
+                                   .select(lambda publisher: publisher.name) \
+                                   .remove_dupes()
+
+    def get_books(self, *args, **kwargs):
+        return self._database.books.where(*args, **kwargs)

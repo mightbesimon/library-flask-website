@@ -41,7 +41,7 @@
     --heading  : var(--green2);
     --footer   : var(--cream-dark);
     --card     : var(--cream-light);
-    --border   : rgba(255, 255, 255, 0.1);
+    --border   : rgba(255, 255, 255, .1);
     --button   : var(--green);
     --button-hover: hsl(128, 30%, 32%);
 }
@@ -148,8 +148,10 @@ main section.image-table {
 }
 /* .card */
 main section.image-table div.card {
+    flex: 1 1 calc(25% - 2rem);
     margin: 1rem;
-    flex: 1 1 20%;
+    /*max-width: calc(33.3% - 2rem);*/
+    max-width: 28.3%;
     border-radius: 1rem;
 
     box-shadow: var(--shadow-card);
@@ -170,6 +172,109 @@ main section.image-table div.card div.title {
 main section.image-table div.card:hover {
     /*margin: 0;*/
     box-shadow: var(--shadow-card2);
+}
+
+/* * * * * * * * * * * * * * * * * * * * * */
+/* * *             search              * * */
+/* * * * * * * * * * * * * * * * * * * * * */
+main div.title-search-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+main div.title-search-box form.search-box {
+    padding-top: .5rem;
+    display: flex;
+}
+main div.title-search-box form.search-box input[type='text'] {
+    margin: 0;
+    padding: .5rem;
+    width: 20vw;
+    border: 1px solid var(--shadow);
+    border-right: 0;
+    border-radius: .5rem 0 0 .5rem;
+
+    font: .8rem monospace;
+    background: var(--card);
+    color: var(--text);
+    transition: box-shadow .3s;
+}
+main div.title-search-box form.search-box input[type='text']:focus {
+    outline: none;
+    box-shadow: var(--shadow-in);
+}
+main div.title-search-box form.search-box input[type='submit'] {
+    margin: 0;
+    padding: .5rem .65rem .5rem .5rem;
+    border: 0;
+    border-radius: 0 .5rem .5rem 0;
+
+    font: .8rem sans-serif;
+    background: var(--button);
+    color: var(--nav-text);
+    transition: padding .3s, box-shadow .3s, background .3s;
+}
+main div.title-search-box form.search-box input[type='submit']:hover {
+    padding-top: .6rem;
+    padding-bottom: .4rem;
+    box-shadow: var(--shadow-in);
+    background: var(--button-hover);
+}
+
+main form.search-panel {
+    margin-bottom: 1.8rem;
+    padding: .8rem;
+    border-radius: .5rem;
+    box-shadow: var(--shadow-card);
+    background: var(--card);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+main form.search-panel div.field {
+    margin: .5rem;
+}
+main form.search-panel div.field input[type='text'] {
+    padding: .25rem;
+    border: 1px solid var(--shadow);
+    width: 31.5vw;
+    height: 1rem;
+    border-radius: 5px;
+
+    font: .8rem monospace;
+    background: var(--nav-text);
+    color: var(--text);
+    transition: box-shadow .3s;
+}
+main form.search-panel div.field select {
+    -webkit-appearance: menulist-button;
+    height: calc(1.5rem + 2px);
+    border: 1px solid var(--shadow);
+    font-size: .8rem;
+    font-variant-numeric: tabular-nums;
+    background: var(--card);
+    color: var(--text);
+}
+main form.search-panel input[type='submit'] {
+    padding: .5rem;
+    border: 0;
+    width: 12%;
+    border-radius: .5rem;
+
+    font: .8rem sans-serif;
+    background: var(--button);
+    color: var(--nav-text);
+    transition: padding .3s, box-shadow .3s, background .3s;
+}
+main form.search-panel input[type='submit']:hover {
+    padding-top: .6rem;
+    padding-bottom: .4rem;
+    box-shadow: var(--shadow-in);
+    background: var(--button-hover);
+}
+main p.no-results {
+    margin: 2.5rem;
+    text-align: center;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * */
@@ -212,7 +317,7 @@ main section.book-info div.image-card img {
     display: block;
     width: 100%;
     height: auto;
-    border-radius: 0.5rem;
+    border-radius: .5rem;
 }
 main section.book-info div.image-card h5.ebook {
     margin: .5rem .5rem 0 .5rem;
@@ -228,7 +333,7 @@ main section.book-info div.image-card h5.ebook {
 main section.book-info div.image-card h4.button {
     margin: 1rem 1rem 0 1rem;
     padding: .5rem;
-    border-radius: 0.5rem;
+    border-radius: .5rem;
 
     text-align: center;
     background: var(--button);
@@ -245,7 +350,7 @@ main section.book-info div.image-card h4.read {
     margin: 1rem 1rem 0 1rem;
     padding: calc(.5rem - 1px);
     border: 1px solid var(--shadow);
-    border-radius: 0.5rem;
+    border-radius: .5rem;
 
     text-align: center;
     background: var(--nav-text);
@@ -342,7 +447,7 @@ main section.write-review form.review input[type='submit'] {
     padding: .5rem;
     width: 25%;
     border: 1px solid var(--shadow);
-    border-radius: 0.5rem;
+    border-radius: .5rem;
 
     font-size: 1rem;
     text-align: center;
@@ -379,7 +484,7 @@ main section.kia-ora form.credentials {
     width: 30vw;
     border-radius: 1rem;
 
-    font: 0.8rem monospace;
+    font: .8rem monospace;
     box-shadow: var(--shadow-card);
     background: var(--card);
 
@@ -416,7 +521,8 @@ main section.kia-ora form.credentials input[type='text'],
 main section.kia-ora form.credentials input[type='password'] {
     padding: .2rem;
     width: 20vw;
-    border-radius: 0.2rem;
+    border: 0;
+    border-radius: .2rem;
     font-size: 1rem;
     box-shadow: var(--shadow-in);
     background: var(--main);
@@ -427,7 +533,7 @@ main section.kia-ora form.credentials input[type='submit'] {
     padding: .5rem;
     width: 15vw;
     border: 0;
-    border-radius: 0.5rem;
+    border-radius: .5rem;
 
     font-size: 1rem;
     text-align: center;

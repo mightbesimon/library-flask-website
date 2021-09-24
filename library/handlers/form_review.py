@@ -7,8 +7,6 @@ from flask_wtf import FlaskForm
 from wtforms import RadioField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired
 
-from ..adapters import _repo
-
 
 class ReviewForm(FlaskForm):
 
