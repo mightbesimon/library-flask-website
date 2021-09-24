@@ -19,4 +19,8 @@ class EnvConfig:
     FLASK_ENV  = environ.get('FLASK_ENV')
     SECRET_KEY = environ.get('SECRET_KEY')
 
-    # TESTING = environ.get('TESTING')
+
+class TestingConfig(EnvConfig):
+
+    TESTING = True
+    WTF_CSRF_ENABLED= False 

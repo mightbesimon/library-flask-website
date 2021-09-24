@@ -6,6 +6,7 @@ from utils import get_project_root
 from library.models import Publisher, Author, Book, Review, User, BooksInventory
 from library.adapters.jsondatareader import BooksJSONReader
 
+
 ######################### simon:tests ##########################
 class TestBaseModel:
 

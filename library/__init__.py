@@ -9,9 +9,9 @@ from config import EnvConfig
 from .blueprints import home, catalogue, authentication, account, error
 
 
-def create_app():
+def create_app(ConfigObj=EnvConfig):
     app = Flask(__name__)
-    app.config.from_object(EnvConfig)           # configure flask app
+    app.config.from_object(ConfigObj)           # configure flask app
     
     app.register_blueprint(error.blueprint)     # custom 404 error page
 

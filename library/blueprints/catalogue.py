@@ -28,7 +28,6 @@ def catalogue():
 @blueprint.route('/catalogue/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm()
-    print(form.data)
 
     if form.validate_on_submit():
         args = {
@@ -40,7 +39,8 @@ def search():
         query = '&'.join( f'{label}={field.data}' 
                           for label, field in args.items() 
                           if field.data and field.data!='<ANY>' )
-        return redirect(f'/catalogue/search?{query}')
+        return redirect(f'/catalogue/search?{query}') \
+            if query else redirect(f'/catalogue/search')
 
     # url query string
     title     = request.args.get('title'    )
