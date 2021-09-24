@@ -111,6 +111,21 @@ nav h2:hover {
     background: var(--nav-hover);
     color: var(--nav-text);
 }
+nav header {
+    padding: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    font-size: 6rem;
+    text-shadow: -.5rem 1rem 1rem var(--shadow);
+    background: var(--nav-bg);
+    transition: border-radius .5s;
+}
+nav header div.logo {
+    border-radius: 1rem;
+    box-shadow: var(--shadow-hover);
+    background: var(--nav-hover);
+}
 nav footer {
     box-sizing: border-box;
     width: 100%;

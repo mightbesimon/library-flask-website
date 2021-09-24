@@ -1,3 +1,6 @@
+<header{% if nav.first_current() %} class="before" {% endif %}>
+    <div class="logo">📚</div>
+</header>
 {% for tab in nav %}
     <a href="{{ tab.url }}">
         <h2 {% if tab.is_current()     %} class="current" {% endif %}
