@@ -26,5 +26,97 @@
     All rights reserved. <a href="github.com/mightbesimon">mightbesimon</a> 2021
     <br>
     Everything else: MIT
+    <br><br>
+    <h2>Structure</h2>
+    <div class="code">compsci235-assignment2-covid-19/
+│
+├──📁 .git/
+│   └── ...
+├──📁 .github/
+│   └── ...
+├──⚙️ .gitignore
+├──📁 venv/
+│   └── ...
+│
+├──📦 library/
+│   │
+│   ├──📁 data/
+│   │   ├──🗂 book_authors_excerpt.json
+│   │   ├──🗂 comic_books_excerpt.json
+│   │   └──🗂 dummy_users_and_reviews.json
+│   ├──📦 models/
+│   │   ├──📄 __init__.py
+│   │   ├──📄 publisher.py
+│   │   ├──📄 author.py
+│   │   ├──📄 book.py
+│   │   ├──📄 review.py
+│   │   ├──📄 user.py
+│   │   └──📄 inventory.py
+│   │
+│   ├──📦 adapters/
+│   │   ├──📄 __init__.py
+│   │   ├──📄 jsondatareader.py
+│   │   ├──📄 dataset.py
+│   │   ├──📄 librarydataContext.py
+│   │   ├──📄 irepository.py
+│   │   └──📄 libraryrepository.py
+│   ├──📦 blueprints/
+│   │   ├──📄 __init__.py
+│   │   ├──📄 home.py
+│   │   ├──📄 authentication.py
+│   │   ├──📄 account.py
+│   │   ├──📄 catalogue.py
+│   │   └──📄 error.py
+│   ├──📦 handlers/
+│   │   ├──📄 __init__.py
+│   │   ├──📄 authorisation.py
+│   │   ├──📄 form_register.py
+│   │   ├──📄 form_login.py
+│   │   ├──📄 form_review.py
+│   │   ├──📄 form_search.py
+│   │   └──📄 navigation.py
+│   │
+│   ├──📁 static/
+│   │   ├──🏞 about.png
+│   │   ├──🏞 login.png
+│   │   ├──🏞 register.png
+│   │   ├──🏞 favicon.ico
+│   │   ├──🏞 notfound.gif
+│   │   ├──📄 home.css
+│   │   └──📄 style.css
+│   ├──📁 templates/
+│   │   ├──📄 aboutus.html
+│   │   ├──📄 home.html
+│   │   │
+│   │   ├──📄 credentials.html
+│   │   ├──📄 account.html
+│   │   ├──📄 social.html
+│   │   │
+│   │   ├──📄 catalogue.html
+│   │   ├──📄 book_info.html
+│   │   │
+│   │   ├──📄 layout.html
+│   │   ├──📄 navigation.html
+│   │   └──📄 notfound.html
+│   │
+│   └──📄 __init__.py
+│
+├──📁 tests/
+│   ├──📁 intergration/
+│   │   └──🧪 test_end2end.py
+│   └──📁 unit/
+│       ├──🧪 test_adapters.py
+│       ├──🧪 test_handlers.py
+│       └──🧪 test_models.py
+│
+│
+├──⚙️ requirements.txt
+├──📚 structure.txt
+├──📚 README.md
+│
+├──⚙️ .env
+├──⚙️ config.py
+├──📄 utils.py
+└──📄 wsgi.py</div>
 </section>
 {% endblock %}

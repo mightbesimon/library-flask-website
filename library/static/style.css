@@ -662,6 +662,15 @@ span.code {
     font: .75rem monospace;
     background: var(--footer);
 }
+div.code {
+    white-space: pre-wrap;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: .3rem;
+    border: 1px solid var(--shadow);
+    font: .6rem monospace;
+    background: var(--footer);
+}
 
 /**************************************************************
  *****         footer, copyright information etc.         *****
