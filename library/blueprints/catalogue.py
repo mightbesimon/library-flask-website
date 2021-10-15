@@ -79,7 +79,7 @@ def read(bookID):
     book = _repo.get_book(book_id=int(bookID))
     user = _repo.get_current_user()
     if book in user.read_books:
-        user.books_read.remove(book)
+        user.read_books.remove(book)
     else:
         user.read_a_book(book)
     return redirect(f'/book/{bookID}')
