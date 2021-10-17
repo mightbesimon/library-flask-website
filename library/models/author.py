@@ -11,9 +11,9 @@ class Author(BaseModel):
     def __init__(self, author_id: int, author_full_name: str):
         if not isinstance(author_id, int) or author_id<0:
             raise ValueError
-        self.__unique_id = author_id
-        self.__coauthors = set()
-        self.full_name   = author_full_name     # use setter
+        self._unique_id = author_id
+        self._coauthors = set()
+        self.full_name  = author_full_name     # use setter
 
     def __repr__(self):
         return f'<Author {self.full_name}, author id = {self.unique_id}>'\
@@ -22,22 +22,22 @@ class Author(BaseModel):
 
     def add_coauthor(self, coauthor):
         if self!=coauthor:
-            self.__coauthors.add(coauthor)
-            # coauthor.__coauthors.add(self)    # the tests didn't like that
+            self._coauthors.add(coauthor)
+            # coauthor._coauthors.add(self)     # the tests didn't like that
 
     def check_if_this_author_coauthored_with(self, author):
-        return author in self.__coauthors
+        return author in self._coauthors
 
     ####################   properties   ####################
     @key_property
     def unique_id(self) -> int:
-        return self.__unique_id
+        return self._unique_id
 
     @property
     def full_name(self) -> str:
-        return self.__full_name
+        return self._full_name
     @full_name.setter
     def full_name(self, author_full_name: str):
         if not isinstance(author_full_name, str) or not author_full_name.strip():
             raise ValueError
-        self.__full_name = author_full_name.strip()
+        self._full_name = author_full_name.strip()

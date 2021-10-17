@@ -14,17 +14,17 @@ from . import Book, Review
 class User(BaseModel):
 
     def __init__(self, username: str, password: str):
-        self.__username = username.strip().lower() \
+        self._username = username.strip().lower() \
             if isinstance(username, str) and username.strip() \
             else None
-        self.__password = self.salt_hash(password) \
+        self._password = self.salt_hash(password) \
             if isinstance(password,  str) and len(password)>=7  \
             else None
-        self.__books_read = []
-        self.__reviews    = []
-        self.__pages_read = 0
-        self.__followers  = []
-        self.__following  = []
+        self._books_read = []
+        self._reviews    = []
+        self._pages_read = 0
+        self._followers  = []
+        self._following  = []
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -33,12 +33,12 @@ class User(BaseModel):
 
     def read_a_book(self, book: Book):
         if not isinstance(book, Book): return
-        self.__books_read.append(book)
-        self.__pages_read += book.num_pages if book.num_pages else 0
+        self._books_read.append(book)
+        self._pages_read += book.num_pages if book.num_pages else 0
 
     def add_review(self, review: Review):
         if isinstance(review, Review):
-            self.__reviews.append(review)
+            self._reviews.append(review)
 
 
     def follow(self, user: 'User'):
@@ -71,28 +71,28 @@ class User(BaseModel):
     ####################   properties   ####################
     @key_property
     def username(self) -> str:
-        return self.__username
+        return self._username
 
     @property
     def password(self) -> str:
-        return self.__password
+        return self._password
 
     @property
     def books_read(self) -> List[Book]:
-        return self.__books_read
+        return self._books_read
 
     @property
     def reviews(self) -> List[Review]:
-        return self.__reviews
+        return self._reviews
 
     @property
     def pages_read(self) -> int:
-        return self.__pages_read
+        return self._pages_read
 
     @property
     def followers(self) -> int:
-        return self.__followers
+        return self._followers
 
     @property
     def following(self) -> int:
-        return self.__following
+        return self._following

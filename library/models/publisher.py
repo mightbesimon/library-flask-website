@@ -17,10 +17,10 @@ class Publisher(BaseModel):
     ####################   properties   ####################
     @key_property
     def name(self) -> str:
-        return self.__name
+        return self._name
 
     @name.setter
     def name(self, publisher_name: str):
-        self.__name = publisher_name.strip() \
+        self._name = publisher_name.strip() \
             if isinstance(publisher_name, str) and publisher_name.strip() \
             else 'N/A'

@@ -12,13 +12,13 @@ from . import Book
 class Review(BaseModel):
 
     def __init__(self, book: Book, user: 'User', review_text: str, rating: int):
-        self.__book = book if isinstance(book, Book) else None
-        self.__user = user
-        self.__review_text = review_text.strip() \
+        self._book = book if isinstance(book, Book) else None
+        self._user = user
+        self._review_text = review_text.strip() \
                     if isinstance(review_text, str) else 'N/A'
         if not 1<=rating<=5: raise ValueError
-        self.__rating = rating
-        self.__timestamp = datetime.now()
+        self._rating = rating
+        self._timestamp = datetime.now()
 
     def __repr__(self):
         return f'<Review of book {self.book}, rating = {self.rating}, timestamp = {self.timestamp}>'
@@ -26,20 +26,20 @@ class Review(BaseModel):
     ####################   properties   ####################
     @property
     def book(self) -> Book:
-        return self.__book
+        return self._book
 
     @property
     def user(self) -> 'User':
-        return self.__user
+        return self._user
 
     @property
     def review_text(self) -> str:
-        return self.__review_text
+        return self._review_text
 
     @property
     def rating(self) -> int:
-        return self.__rating
+        return self._rating
 
     @key_property
     def timestamp(self) -> datetime:
-        return self.__timestamp
+        return self._timestamp
