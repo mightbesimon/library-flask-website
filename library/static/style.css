@@ -45,6 +45,7 @@
     --border   : rgba(255, 255, 255, .1);
     --button   : var(--green);
     --button-hover: hsl(128, 30%, 32%);
+    --code     : rgba(255, 64, 128, .8);
 }
 
 /**************************************************************
@@ -662,6 +663,7 @@ span.code {
     border: 1px solid rgba(0, 0, 0, .2);
     font: .75rem monospace;
     background: var(--footer);
+    color: var(--code);
 }
 div.code {
     white-space: pre-wrap;
