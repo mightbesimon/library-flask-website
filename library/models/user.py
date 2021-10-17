@@ -51,15 +51,6 @@ class User(BaseModel):
         while self in user.followers:
             user.followers.remove(self)
 
-    def num_books_read(self):
-        return len(self.books_read)
-
-    def num_reviews(self):
-        return len(self.reviews)
-
-    def num_followers(self):
-        return len(self.followers)
-
     ##################   static methods   ##################
     @staticmethod
     def salt_hash(password):
@@ -90,9 +81,26 @@ class User(BaseModel):
         return self._pages_read
 
     @property
-    def followers(self) -> int:
+    def followers(self) -> List['User']:
         return self._followers
 
     @property
-    def following(self) -> int:
+    def following(self) -> List['User']:
         return self._following
+
+    ##############   computed properties   ###############
+    @property
+    def num_books_read(self):
+        return len(self.books_read)
+
+    @property
+    def num_reviews(self):
+        return len(self.reviews)
+
+    @property
+    def num_followers(self):
+        return len(self.followers)
+
+    @property
+    def num_following(self):
+        return len(self.following)

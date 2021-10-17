@@ -19,7 +19,7 @@ def account():
     discover = _repo.get_users() \
                 .remove(user) \
                 .where(lambda other: other not in user.following) \
-                .order_by(lambda other: other.num_followers(), reverse=True)
+                .order_by(lambda other: other.num_followers, reverse=True)
 
     return render_template('account.html', nav=nav, user=user, discover=discover)
 
@@ -42,7 +42,7 @@ def social():
     discover = _repo.get_users() \
                 .remove(user) \
                 .where(lambda other: other not in user.following) \
-                .order_by(lambda other: other.num_followers(), reverse=True)
+                .order_by(lambda other: other.num_followers, reverse=True)
     return render_template('social.html', nav=nav, user=user, discover=discover)
 
 @blueprint.route('/social/follow')
