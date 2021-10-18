@@ -6,10 +6,6 @@
 from .dataset import DataSet
 from .memory_datacontext  import MemoryDataContext
 from .memory_repository   import MemoryRepository
-
-from .orm import metadata, map_orm
-
-# from .database_sessioncontext import DatabaseSessionContext
 from .database_repository import DatabaseRepository
 
-
+from .orm import metadata, map_orm

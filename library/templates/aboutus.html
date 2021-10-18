@@ -43,7 +43,8 @@
 │   ├──📁 data/
 │   │   ├──🗂 book_authors_excerpt.json
 │   │   ├──🗂 comic_books_excerpt.json
-│   │   └──🗂 dummy_users_and_reviews.json
+│   │   ├──🗂 dummy_users_and_reviews.json
+│   │   └──🗃 database.sqlite
 │   ├──📦 models/
 │   │   ├──📄 __init__.py
 │   │   ├──📄 publisher.py
@@ -55,10 +56,14 @@
 │   │
 │   ├──📦 adapters/
 │   │   ├──📄 __init__.py
-│   │   ├──📄 jsondatareader.py
-│   │   ├──📄 dataset.py
-│   │   ├──📄 memory_datacontext.py
+│   │   ├──📄 orm.py
+│   │   ├──📄 migration.py
+│   │   ├──📄 database_sessioncontext.py
+│   │   ├──📄 database_repository.py
 │   │   ├──📄 abstract_repository.py
+│   │   ├──📄 dataset.py
+│   │   ├──📄 jsondatareader.py
+│   │   ├──📄 memory_datacontext.py
 │   │   └──📄 memory_repository.py
 │   ├──📦 blueprints/
 │   │   ├──📄 __init__.py
@@ -104,11 +109,18 @@
 ├──📁 tests/
 │   ├──📁 intergration/
 │   │   └──🧪 test_end2end.py
-│   └──📁 unit/
-│       ├──🧪 test_adapters.py
-│       ├──🧪 test_handlers.py
-│       └──🧪 test_models.py
+│   ├──📁 unit/
+│   │   ├──🧪 test_adapters.py
+│   │   ├──🧪 test_database.py
+│   │   ├──🧪 test_migration.py
+│   │   ├──🧪 test_handlers.py
+│   │   └──🧪 test_models.py
+│   │
+│   └──🗃 database.sqlite
 │
+├──📁 images/
+│   ├──🏞 models.png
+│   └──🏞 database.png
 │
 ├──⚙️ requirements.txt
 ├──📚 structure.txt
