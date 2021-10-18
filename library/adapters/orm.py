@@ -99,13 +99,16 @@ def map_orm():
     mapper(model.User, table.Users, properties={
         '_username'  : table.Users.c.username,
         '_password'  : table.Users.c.password,
-        '_books_read': relationship(model.Book  , secondary=table.BooksReadAssociation),
+        '_books_read': relationship(model.Book, secondary=table.BooksReadAssociation),
         '_reviews'   : relationship(model.Review),
         '_pages_read': table.Users.c.pagesRead,
-        '_followers' : relationship(model.User  , secondary=table.FollowersAssociation,
-                                        foreign_keys=table.FollowersAssociation.c.followerID ),
-        '_following' : relationship(model.User  , secondary=table.FollowersAssociation,
-                                        foreign_keys=table.FollowersAssociation.c.followingID),
+        '_followers' : relationship(model.User, secondary=table.FollowersAssociation,
+                            primaryjoin=table.Users.c.userID==table.FollowersAssociation.c.followingID,
+                            secondaryjoin=table.Users.c.userID==table.FollowersAssociation.c.followerID),
+        '_following' : relationship(model.User, secondary=table.FollowersAssociation,
+                            primaryjoin=table.Users.c.userID==table.FollowersAssociation.c.followerID,
+                            secondaryjoin=table.Users.c.userID==table.FollowersAssociation.c.followingID,
+                            overlaps="_followers"),
     })
 
     mapper(model.Review, table.Reviews, properties={

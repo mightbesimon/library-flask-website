@@ -43,13 +43,13 @@ class User(BaseModel):
 
     def follow(self, user: 'User'):
         self.following.append(user)
-        user.followers.append(self)
+        # user.followers.append(self)
 
     def unfollow(self, user: 'User'):
         while user in self.following:
             self.following.remove(user)
-        while self in user.followers:
-            user.followers.remove(self)
+        # while self in user.followers:
+        #     user.followers.remove(self)
 
     ##################   static methods   ##################
     @staticmethod
