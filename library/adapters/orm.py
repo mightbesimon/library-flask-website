@@ -110,7 +110,7 @@ def map_orm():
 
     mapper(model.Review, table.Reviews, properties={
         '_book'       : relationship(model.Book),
-        '_user'       : relationship(model.User),
+        '_user'       : relationship(model.User, overlaps="_reviews"),
         '_review_text': table.Reviews.c.reviewText,
         '_rating'     : table.Reviews.c.rating,
         '_timestamp'  : table.Reviews.c.timestamp,
