@@ -74,3 +74,11 @@ class AbstractRepository(ABC):
     def get_publishers_names(self):
         '''get all publishers' names, no duplicates'''
         raise NotImplementedError
+
+    @abstractmethod
+    def toggle_read(self, user, book):
+        raise NotImplementedError
+
+    @abstractmethod
+    def toggle_follow(self, user, book):
+        raise NotImplementedError

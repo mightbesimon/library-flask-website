@@ -14,15 +14,11 @@ from config import EnvConfig
 def create_app(ConfigObj=EnvConfig):
     app = Flask(__name__)
 
-
-    ##############   configure flask app   ###############
-
+##################   configure flask app   ###################
     app.config.from_object(ConfigObj)           # default = EnvConfig
                                                 # testing = TestingConfig
 
-
-    ############   instantiate a repository   ############
-
+################   instantiate a repository   ################
     from . import adapters
     from .adapters import MemoryRepository, DatabaseRepository, map_orm, migration
 
@@ -44,9 +40,7 @@ def create_app(ConfigObj=EnvConfig):
 
         map_orm() if engine.table_names() else migration.add(engine)
 
-
-    ##############   register blueprints   ###############
-
+##################   register blueprints   ###################
     from .blueprints import home, catalogue, authentication, account, error
 
     app.register_blueprint(error.blueprint)     # custom 404 error page

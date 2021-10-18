@@ -86,3 +86,19 @@ class DatabaseRepository(AbstractRepository):
                     .select(lambda book: book.publisher) \
                     .select(lambda publisher: publisher.name) \
                     .remove_dupes()
+
+    def toggle_read(self, user, book):
+        with self._context as context:
+            if book in user.books_read:
+                user.books_read.remove(book)
+            else:
+                user.read_a_book(book)
+            context.session.commit()
+
+    def toggle_follow(self, user, other):
+        with self._context.session.no_autoflush as session:
+            if other in user.following:
+                user.unfollow(other)
+            else:
+                user.follow(other)
+            session.commit()

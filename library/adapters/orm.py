@@ -65,8 +65,8 @@ class DbTablesContainer:
     )
 
     FollowersAssociation = Table('FollowersAssociation', metadata,
-        Column('followerID' , ForeignKey('Users.userID'), primary_key=True ),
-        Column('followingID', ForeignKey('Users.userID'), primary_key=True ),
+        Column('followerID' , ForeignKey('Users.userID'), primary_key=True),
+        Column('followingID', ForeignKey('Users.userID'), primary_key=True),
     )
 
 

@@ -28,11 +28,7 @@ def account():
 def follow():
     user  = _repo.get_user(username=session['username'])
     other = _repo.get_user(username=request.args.get('username'))
-    if other:
-        if other in user.following:
-            user.unfollow(other)
-        else:
-            user.follow(other)
+    if other: _repo.toggle_follow(user, other)
     return redirect('/account#following')
 
 @blueprint.route('/social')
@@ -50,11 +46,7 @@ def social():
 def follow_social():
     user  = _repo.get_user(username=session['username'])
     other = _repo.get_user(username=request.args.get('username'))
-    if other:
-        if other in user.following:
-            user.unfollow(other)
-        else:
-            user.follow(other)
+    if other: _repo.toggle_follow(user, other)
     return redirect('/social#following')
 
 # TODO: your suggestions
