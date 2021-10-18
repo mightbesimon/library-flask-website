@@ -9,6 +9,7 @@ from sqlalchemy.orm import sessionmaker, clear_mappers
 
 from library import adapters
 from library.adapters import metadata, map_orm, migration, DatabaseRepository
+from library.models   import User, Review
 
 IN_MEMORY_DATABASE_URI = 'sqlite://'
 FILE_DATABASE_URI = 'sqlite:///tests/testingDB.sqlite'
@@ -46,8 +47,22 @@ def session_empty():
 
 class TestDatabaseORM:
 
-    def test_loading_of_users(session_empty):
-        ...
+    def test_saving_loading_users(self, session_empty):
+        session_empty.add(User('Alan Turing', 'password'))
+        session_empty.add(User('Simon', 'password'))
+        session_empty.commit()
+
+        assert [('alan turing',), ('simon',)]==list(session_empty.execute('SELECT username FROM Users'))
+
+    def test_following_users(self, session_empty):
+        turing = User('Alan Turing', 'password')
+        simon  = User('Simon'      , 'password')
+        session_empty.add(turing)
+        session_empty.add(simon)
+        turing.follow(simon)        # turing follows simon
+        session_empty.commit()      # this change is saved in the database upon commit
+
+        assert [(1,2)]==list(session_empty.execute('SELECT followerID, followingID FROM FollowersAssociation'))
 
 
 class TestDatabaseRepository:
