@@ -6,7 +6,7 @@
 from abc import ABC, abstractmethod
 
 
-class IRepository(ABC):
+class AbstractRepository(ABC):
 
     @abstractmethod
     def username_exists(self, username):

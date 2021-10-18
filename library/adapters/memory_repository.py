@@ -6,14 +6,13 @@
 from hashlib import sha256
 from flask   import session
 
-from .dataset import DataSet
-from .irepository import IRepository
-from .librarydatacontext import LibraryDataContext
+from .abstract_repository import AbstractRepository
+from .memory_datacontext  import MemoryDataContext
 
-class LibraryRepository(IRepository):
+class MemoryRepository(AbstractRepository):
 
-    def __init__(self):
-        self._database = LibraryDataContext()
+    def __init__(self, database=MemoryDataContext()):
+        self._database = database
 
     def username_exists(self, username):
         return self._database.users.any(username=username.lower())
@@ -21,6 +20,7 @@ class LibraryRepository(IRepository):
     def add_user(self, user):
         '''returns a copy of the entry added to the database'''
         entry = self._database.users.add(user)
+        self._database.save_changes()
         return entry
 
     def authenticate_user(self, username, password):
@@ -61,6 +61,7 @@ class LibraryRepository(IRepository):
     def add_review(self, review):
         '''returns a copy of the entry added to the database'''
         entry = self._database.reviews.add(review)
+        self._database.save_changes()
         return entry
 
     def get_authors_names(self):

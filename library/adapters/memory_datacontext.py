@@ -13,7 +13,7 @@ FILENAME_AUTHORS = DATA_DIRECTORY+'book_authors_excerpt.json'
 FILENAME_USERS   = DATA_DIRECTORY+'dummy_users_and_reviews.json'
 
 
-class LibraryDataContext:
+class MemoryDataContext:
 
     @property
     def catalogue(self) -> DataSet:
@@ -48,3 +48,6 @@ class LibraryDataContext:
         reader.read_json_file(self.catalogue)
         self._users   = DataSet(reader.dataset_of_users)
         self._reviews = DataSet(reader.dataset_of_reviews)
+
+    def save_changes(self):
+        pass

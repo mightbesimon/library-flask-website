@@ -1,5 +1,5 @@
 ''' COMPSCI 235 (2021) - University of Auckland
-    ASSIGNMENT PHASE TWO
+    ASSIGNMENT PHASE TWO & THREE
     Simon Shan  441147157
 
     Flask configuration variables.
@@ -19,8 +19,17 @@ class EnvConfig:
     FLASK_ENV  = environ.get('FLASK_ENV')
     SECRET_KEY = environ.get('SECRET_KEY')
 
+    SQLALCHEMY_ECHO = environ.get('SQLALCHEMY_ECHO')=='True'
+    SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
+    REPOTYPE = environ.get('REPOTYPE')
+    # REPOTYPE = 'memory'
+
 
 class TestingConfig(EnvConfig):
+    '''override configuration for testing'''
 
     TESTING = True
-    WTF_CSRF_ENABLED= False 
+    WTF_CSRF_ENABLED = False
+    REPOTYPE = 'memory'
+    # SQLALCHEMY_ECHO  = True
+    # SQLALCHEMY_DATABASE_URI = 'sqlite:///tests/testingDB.sqlite'

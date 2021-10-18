@@ -76,9 +76,9 @@ compsci235-assignment2-covid-19/
 │   │   ├──📄 __init__.py
 │   │   ├──📄 jsondatareader.py
 │   │   ├──📄 dataset.py
-│   │   ├──📄 librarydataContext.py
-│   │   ├──📄 irepository.py
-│   │   └──📄 libraryrepository.py
+│   │   ├──📄 memory_datacontext.py
+│   │   ├──📄 abstract_repository.py
+│   │   └──📄 memory_repository.py
 │   ├──📦 blueprints/
 │   │   ├──📄 __init__.py
 │   │   ├──📄 home.py

@@ -5,9 +5,7 @@
 
 import pytest
 
-from library.adapters.dataset import DataSet
-from library.adapters.librarydatacontext import LibraryDataContext
-from library.adapters.libraryrepository  import LibraryRepository
+from library.adapters import DataSet, MemoryDataContext, MemoryRepository
 
 
 class Container:
@@ -91,9 +89,9 @@ class TestDataSet:
 
 @pytest.fixture
 def database():
-    return LibraryDataContext()
+    return MemoryDataContext()
 
-class TestLibraryDataContext:
+class TestMemoryDataContext:
 
     def test_catalogue(self, database):
         assert isinstance(database.catalogue, DataSet)
@@ -112,12 +110,12 @@ class TestLibraryDataContext:
 
 @pytest.fixture
 def repo():
-    return LibraryRepository()
+    return MemoryRepository()
 
-class TestLibraryRepository:
+class TestMemoryRepository:
 
     def test_initialisation(self, repo):
-        assert isinstance(repo._database, LibraryDataContext)
+        assert isinstance(repo._database, MemoryDataContext)
 
     def test_get_catalogue(self, repo):
         catalogue = repo.get_catalogue()

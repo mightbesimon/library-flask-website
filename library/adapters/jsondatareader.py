@@ -22,13 +22,18 @@ language_codes = {
 class BooksJSONReader:
 
     def __init__(self, filename_books: str, filename_authors: str):
-        self.__filename_books   = filename_books
-        self.__filename_authors = filename_authors
-        self.__dataset_of_books = []
+        self.__filename_books     = filename_books
+        self.__filename_authors   = filename_authors
+        self.__dataset_of_books   = []
+        self.__dataset_of_authors = []
 
     @property
     def dataset_of_books(self) -> List[Book]:
         return self.__dataset_of_books
+
+    @property
+    def dataset_of_authors(self) -> List[Author]:
+        return self.__dataset_of_authors
 
     def read_json_files(self):
         authors = {}            # authors from the author file
@@ -44,6 +49,8 @@ class BooksJSONReader:
 
                 author_id   = int(author_data['author_id'])                 # author ID
                 authors[author_id] = Author(author_id, author_data['name']) # auther full name
+
+        self.__dataset_of_authors = list(authors.values())
 
         # build the books dictionary
         # build the books_authors dictionary
