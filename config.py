@@ -22,7 +22,6 @@ class EnvConfig:
     SQLALCHEMY_ECHO = environ.get('SQLALCHEMY_ECHO')=='True'
     SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
     REPOTYPE = environ.get('REPOTYPE')
-    # REPOTYPE = 'memory'
 
 
 class TestingConfig(EnvConfig):
@@ -31,5 +30,3 @@ class TestingConfig(EnvConfig):
     TESTING = True
     WTF_CSRF_ENABLED = False
     REPOTYPE = 'memory'
-    # SQLALCHEMY_ECHO  = True
-    # SQLALCHEMY_DATABASE_URI = 'sqlite:///tests/testingDB.sqlite'
