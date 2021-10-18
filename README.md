@@ -6,6 +6,7 @@
 
 - [Description](#description)
 - [Structure](#structure)
+- [Database ERD](#database)
 - [Requirements](#requirements)
 - [Automated Tests](#automated-tests)
 - [Executing the web application](#executing-the-web-application)
@@ -160,6 +161,15 @@ compsci235-assignment2-covid-19/
 - renamed `services` to `handlers`
 - blueprints and handlers are separated into 2 folders, `blueprints/` and `handlers/`
 
+### Domain Models
+
+![domain models](images/models.png)
+
+## Database ##
+
+### Entity Relationship Diagram
+
+![ERD](images/database.png)
 
 ## Requirements ##
 
